@@ -26,13 +26,17 @@ Cuando estás abriendo carpetas, cargando juegos o accediendo a una colección d
 
 **El objetivo es un uso más fluido y menos aparcados innecesarios, cuidando también el funcionamiento del disco a largo plazo.** Quería poder ajustar todo esto de forma sencilla, con botones y explicaciones en español, sin tener que pelearme con una consola de comandos. Por eso nació SeaChest GUI y por eso la guía empieza precisamente por aquí.
 
+También quería **evitar el desgaste asociado a aparcar y volver a cargar los cabezales una y otra vez**. Son mecanismos diseñados para soportar un número determinado de ciclos; acumularlos innecesariamente es un factor de desgaste que merece la pena controlar. Eso no permite afirmar que el parking sea la principal causa de avería en todos los discos ni asegurar cuántos años más durarán.
+
+**Si utilizas el disco con frecuencia, puede ser preferible mantenerlo girando durante la sesión**, aceptando algo más de consumo y calor, para evitar paradas, nuevos arranques y las esperas que conllevan. Siempre con buena ventilación y dentro de las temperaturas especificadas para el modelo. Para periodos largos sin uso, dejarlo descansar puede tener sentido.
+
 A partir de esa necesidad, la interfaz también incorpora acceso a información del disco, comprobaciones de salud, diagnósticos y las demás opciones de openSeaChest.
 
 ### Utilidad principal: reducir reposos y aparcados de cabezales innecesarios
 
 **Evita que tu disco duro Seagate entre en reposo o aparque los cabezales demasiado a menudo mientras utilizas el PC.** En modelos compatibles, SeaChest GUI permite ajustar o desactivar las funciones de ahorro energético EPC/APM que provocan ese comportamiento, desde una interfaz gráfica y sin escribir comandos.
 
-El «parking» consiste en retirar los cabezales a su posición de descanso. Si ocurre con demasiada frecuencia entre accesos, el disco debe volver a colocarlos para leer o escribir. Cuando además se detiene el motor, también necesita tiempo para recuperar su velocidad.
+El «parking» consiste en retirar los cabezales a su posición de descanso. **Los platos pueden seguir girando con los cabezales aparcados:** mantener la rotación no elimina por sí solo el parking. Si el aparcado ocurre con demasiada frecuencia entre accesos, el disco debe volver a colocar los cabezales para leer o escribir. Cuando además se detiene el motor, también necesita tiempo para recuperar su velocidad.
 
 ¿En qué puede ayudarte?
 
@@ -46,6 +50,8 @@ Estos ajustes no impiden todos los aparcados: Windows, el firmware o una caja US
 Si este es tu objetivo, empieza por la primera sección de la pestaña **Guía de Uso** o por la [guía en PDF](Guia_de_Uso_SeaChestGUI_v0.1.8.pdf).
 
 Referencia técnica: [explicación sobre aparcado y ahorro energético en el repositorio oficial de openSeaChest](https://github.com/Seagate/openSeaChest/discussions/82).
+
+Como ejemplo de las especificaciones que deben consultarse para cada modelo, el [manual Seagate Enterprise Capacity v6 SAS](https://www.seagate.com/www-content/product-content/enterprise-hdd-fam/enterprise-capacity-3-5-hdd-10tb/_shared/docs/100791103a.pdf) distingue aparcado y parada del motor, e indica resistencia a ciclos y límites de temperatura. Sus cifras no son universales para otros discos.
 
 ### También puedes
 
