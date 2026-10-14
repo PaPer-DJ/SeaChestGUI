@@ -1,0 +1,65 @@
+v0.1.8 — 13/10/2026
+PASS: compilación contra Microsoft .NET Framework 4.8 y manifiesto UAC.
+PASS: cuatro pestañas, Guía de Uso antes de Ayuda; carga de las 15 secciones
+(12 de uso y 3 anexos) y apertura de lectura ampliada en Linux/Mono.
+PASS: revisión visual de la pestaña y de las 19 páginas del PDF.
+PDF: 15 marcadores de navegación y 12 enlaces externos.
+La guía y el PDF proceden de docs/guia.json y los archivos de LICENCIAS.
+No se han ejecutado comandos sobre discos físicos. La apertura del PDF con
+el lector predeterminado y los enlaces en Windows quedan por validar allí.
+
+v0.1.7 — 30/09/2026
+PASS: compilación contra Microsoft .NET Framework 4.8 y manifiesto UAC.
+Revisión de los mensajes finales: consulta, solicitud de DST, operación
+avanzada, cancelación y error tienen textos distintos.
+Los códigos distintos de cero conservan su detalle y aviso de error.
+Cambio de presentación; argumentos y ejecución de comandos sin cambios.
+No se han ejecutado operaciones sobre discos físicos.
+
+v0.1.6 — 30/09/2026
+PASS: compilación contra Microsoft .NET Framework 4.8 y manifiesto UAC.
+Revisión visual en Linux/Mono del tamaño inicial y de las pestañas
+Tareas habituales y Todas las opciones: botones y controles visibles.
+Panel de resultados: aproximadamente 64 píxeles adicionales de altura.
+Cambio limitado al tamaño y reparto del espacio; motor sin modificaciones.
+
+v0.1.5 — 30/09/2026
+PASS: 6 comprobaciones de tabla de resultados (orden, alineación, N/A,
+letras múltiples, datos originales e identificadores sin cambios).
+PASS: 17 comprobaciones de metadatos y 65 comprobaciones del motor.
+PASS: revisión visual de capacidad, letras y N/A en Resultados.
+PASS: compilación con referencias Microsoft .NET Framework 4.8 y UAC.
+Pruebas realizadas con Mono y datos ficticios, sin acceso a discos físicos.
+
+v0.1.4 — 30/09/2026
+Compilación contra Microsoft .NET Framework 4.8; manifiesto UAC verificado.
+Pruebas enlazadas al EXE final y ejecutadas con Mono (sin acceso a discos).
+PASS: 17 comprobaciones de metadatos y presentación del selector.
+Incluyen tamaños, múltiples particiones, letras ordenadas sin duplicados,
+unidades sin letras, datos no disponibles y actualización sin letras antiguas.
+PASS: 65 comprobaciones de regresión del motor de comandos.
+Ayudas oficiales: 17 módulos, 845 entradas de opciones.
+PASS: revisión visual de la GUI con capacidad y letras ficticias.
+PASS: RT_MANIFEST / ID 1 / requireAdministrator dentro del EXE final.
+Pendiente: lectura WMI de capacidad y letras con discos reales en Windows.
+No se han ejecutado comandos sobre discos físicos.
+
+Resultados anteriores:
+v0.1.3 — 27/09/2026
+Compilación contra Microsoft .NET Framework 4.8; manifiesto UAC verificado.
+Prueba de integración de la ventana con backend simulado (Linux/Mono):
+PASS: se encuentra una unidad al abrir, sin pulsar botones.
+PASS: Buscar discos añade la segunda unidad USB simulada al actualizar.
+Secuencia comprobada: --help, --scan, --scan.
+No se han ejecutado comandos sobre discos físicos.
+
+Resultados de la versión anterior (motor de comandos sin cambios):
+v0.1.2 — 27/09/2026
+Compilación contra las referencias oficiales Microsoft .NET Framework 4.8.
+Pruebas enlazadas al EXE final y ejecutadas con Mono (sin acceso a discos).
+Official Linux help fixtures: 17 modules, 845 option entries.
+PASS: 65 checks
+9 pruebas de regresión nuevas para Vendor / Handle y modelo con espacios.
+PASS: cuatro filas del formato Windows de la captura producen PD0-PD3.
+PASS: RT_MANIFEST / ID 1 / requireAdministrator dentro del EXE final.
+Pendiente: confirmar la detección y operaciones en el equipo Windows real.

@@ -1,0 +1,502 @@
+01 · Evitar reposos: inicio rápido
+
+Si simplemente quieres usar esta herramienta para reducir los reposos, las esperas al acceder a tu disco duro Seagate y los aparcamientos de cabezales asociados al ahorro de energía, empieza por estos pasos.
+
+Esto puede mejorar la respuesta de un HDD compatible. No garantiza alargar su vida útil ni elimina todos los aparcamientos. Mantenerlo activo aumenta el consumo y puede elevar la temperatura. Si hay errores de lectura o ruidos anormales, consulta primero la sección de salud.
+
+1. Elige el disco correcto
+
+Abre SeaChestGUI.exe y acepta el aviso de administrador. Espera la búsqueda automática. En el desplegable, comprueba capacidad, modelo y número de serie; la letra de Windows es una ayuda adicional. Pulsa Información del disco y guarda el registro antes de cambiar nada. Esta guía rápida es para discos HDD de datos, no para aplicar a ciegas a SSD o NVMe.
+
+2. Comprueba si admite EPC
+
+EPC significa condiciones de energía ampliadas; en algunos Seagate se relaciona con PowerChoice. Busca esa compatibilidad en Información del disco. En Todas las opciones, elige PowerControl. Busca --showEPCSettings, selecciónala, deja vacío el campo de valores y pulsa Añadir opción. Mantén marcada Aplicar al disco seleccionado. Pulsa Revisar y ejecutar, comprueba la unidad y confirma con la frase que muestra la aplicación. Guarda el resultado como referencia.
+
+3. Desactiva EPC solo si es compatible
+
+Pulsa Vaciar para quitar la consulta anterior de la lista preparada. Busca --EPCfeature. En el campo de valores escribe únicamente disable, pulsa Añadir opción y después Revisar y ejecutar. Revisa modelo y serie antes de confirmar. No pegues una línea de consola: la GUI ya añade la herramienta y el disco.
+
+4. Comprueba el resultado
+
+Vacía de nuevo la lista y repite --showEPCSettings; consulta también Información del disco. Revisa los estados que indique el dispositivo. Una operación no compatible no confirma un cambio. No fuerces opciones si el adaptador o el disco las rechaza. Continúa con la siguiente sección para APM, Windows y cómo deshacer los ajustes.
+
+La GUI bloquea las operaciones avanzadas sobre el disco que identifica como disco de Windows, incluso algunas consultas de esa pestaña. Si aparece ese aviso, este procedimiento no se puede aplicar desde esta versión. No se debe intentar eludir la protección.
+
+02 · APM, comprobación y vuelta atrás
+
+5. APM es otro ajuste, y no siempre existe
+
+APM es otra forma de ahorro de energía de algunos discos SATA. Si EPC no existe o aún hay esperas, consulta su compatibilidad. En PowerControl, Vaciar, busca --showAPMLevel, deja los valores vacíos, Añadir opción y Revisar y ejecutar. Guarda el nivel original. Si no es compatible, omite este paso.
+
+Si el disco admite desactivar APM, usa --disableAPM sin valor y ejecútala sola. Después consulta --showAPMLevel otra vez. Si admite APM pero no permite desactivarlo, --setAPMLevel con el valor 254 solicita el nivel de máximo rendimiento. No equivale a desactivar todos los mecanismos de reposo y no es un remedio universal. Comprueba siempre la respuesta del disco.
+
+6. Revisa Windows y la carcasa USB
+
+Windows puede ordenar que el disco se apague aunque hayas cambiado EPC o APM. En Windows 10, abre Panel de control > Opciones de energía > Cambiar la configuración del plan > Cambiar la configuración avanzada de energía. Si aparece Disco duro > Apagar el disco duro tras, guarda el valor anterior y selecciona Nunca (0 minutos) para el plan que utilizas. Es un ajuste del plan, no exclusivo del disco elegido en la GUI; puede aumentar el consumo de otros discos.
+
+Una carcasa USB puede tener su propio temporizador y bloquear comandos SATA. Si el problema continúa, comprueba su documentación. La GUI no puede garantizar que una caja USB mantenga el disco despierto. Tampoco evita que se suspenda todo el PC.
+
+7. Verifica que el cambio se conserva
+
+Deja el disco inactivo el tiempo que antes provocaba la espera y prueba a acceder a un archivo. Cuando no haya operaciones pendientes, comprueba los ajustes tras reiniciar y, si procede, después de apagar y encender la unidad de forma segura. La persistencia depende del modelo, firmware y conexión. No se añade una tarea automática de Windows ni es necesario dejar esta GUI abierta para mantener un ajuste que el disco haya guardado.
+
+Cómo volver atrás
+
+Si EPC estaba activado, usa --EPCfeature con enable y comprueba el resultado. Para APM, usa --setAPMLevel con el nivel original que guardaste; si estaba desactivado, usa --disableAPM. Restaura también el valor previo del plan de Windows si lo cambiaste. No apliques default a todos los temporizadores: sus valores de fábrica pueden ser distintos de los que tenías.
+
+03 · Primeros pasos y orientación
+
+Para el resto de operaciones, aquí tienes una guía completa de las funciones de la interfaz y de las principales familias de herramientas, ordenada desde las consultas habituales hasta los cambios más delicados. Las opciones exactas dependen de los ejecutables que tengas instalados; su ayuda integrada es la referencia para cada parámetro.
+
+Instalar y actualizar
+
+Descarga la distribución oficial de openSeaChest para Windows desde el enlace de Descargas de la sección Créditos. Extrae el paquete y copia SeaChestGUI.exe y SeaChestGUI.exe.config junto a openSeaChest_Basics.exe. Conserva también este PDF y la carpeta LICENCIAS. Requiere Windows 10/11 y .NET Framework 4.8. No necesitas usar consola ni PowerShell. Para actualizar, cierra la GUI antes de sustituir sus archivos.
+
+Localizar y reconocer las unidades
+
+La búsqueda se inicia al abrir. Si conectas o desconectas un USB, pulsa Buscar discos. Elegir carpeta permite localizar otra distribución; elige la carpeta que contiene sus EXE. La GUI trabaja con un disco cada vez. PD0, PD1, etc. son identificadores físicos y pueden cambiar al reconectar: confirma siempre modelo y serie.
+
+Capacidad muestra el tamaño total del disco, no el espacio libre. GB y TB son decimales y pueden diferir de la cifra de Windows. Unidad puede mostrar varias letras si hay varias particiones. N/A indica que Windows no ha comunicado letras asignadas; Letras n/d o Capacidad n/d significan que no se pudo obtener ese dato. El disco puede seguir siendo utilizable por openSeaChest.
+
+Dónde está cada cosa
+
+Tareas habituales: información, salud y diagnósticos con botones. Todas las opciones: catálogo de los módulos instalados. Guía de Uso: este documento por secciones, con acceso al PDF. Ayuda: recordatorios rápidos y ayuda original del módulo seleccionado.
+
+Resultados muestra la salida de la herramienta y el mensaje final de la GUI. Guardar registro exporta lo visible a TXT; Limpiar vacía la pantalla cuando no hay una operación activa. Carpeta de resultados abre la ubicación utilizada por defecto para los archivos que generen las herramientas.
+
+04 · Conocer el disco y su salud
+
+Información del disco
+
+Es el mejor punto de partida. Muestra identificación, firmware, capacidad y características que declara la unidad. En USB puede aparecer información de la carcasa junto a la del disco. Una consulta completada correctamente significa que se ha obtenido la información; no certifica que el disco esté sano.
+
+Estado SMART
+
+Consulta el resumen de salud que ofrece la unidad. SMART es su sistema de vigilancia interna. Un resultado favorable no descarta todos los fallos. Si informa de un problema, prioriza una copia de los datos importantes antes de realizar pruebas largas o cambios.
+
+Atributos SMART
+
+Muestra contadores y mediciones más detallados: temperatura, horas de uso y otros indicadores según el modelo. No compares los valores brutos de fabricantes distintos como si fueran equivalentes. Ciertos contadores aumentan de forma normal con el uso. Un contador de cargas y descargas de cabezales, cuando existe, debe interpretarse con el manual del modelo y su evolución, no con un umbral universal.
+
+Estadísticas del dispositivo
+
+Permite consultar información de uso y actividad que el disco expone, como contadores de trabajo o lecturas y escrituras. Úsala para comparar registros tomados en distintas fechas; no es una prueba de velocidad ni un diagnóstico completo por sí sola.
+
+Salud NVMe
+
+Está orientada a SSD NVMe. Puede mostrar avisos, temperatura y desgaste, según la unidad. Un HDD SATA no tiene por qué admitir esta consulta. Los porcentajes y unidades deben leerse tal como los define el fabricante.
+
+Información SATA / SAT
+
+Ayuda a distinguir lo que comunica un disco SATA de lo que traduce un puente USB/SCSI. Es útil si un dato parece extraño o una función no llega al dispositivo. No cambia la conexión ni actualiza el adaptador.
+
+Si el disco se desconecta, hace ruidos anormales o tiene archivos irremplazables que ya no se pueden leer, no empieces por una prueba intensa ni por una reparación. Prioriza conservar o recuperar los datos.
+
+05 · Pruebas de diagnóstico DST
+
+DST es una autoprueba que realiza el propio disco. Los botones de esta GUI solicitan una prueba corta o larga; no son botones de borrado ni de reparación.
+
+Iniciar prueba corta DST
+
+Es una primera comprobación interna. Selecciona la unidad, pulsa el botón y acepta la confirmación. Su duración depende del dispositivo; no todos los discos o adaptadores permiten ejecutarla.
+
+Iniciar prueba larga DST
+
+Es una comprobación más extensa y puede tardar horas, especialmente en discos grandes. Haz copia de los datos importantes antes de someter a pruebas una unidad sospechosa. Durante la prueba el acceso puede ser más lento. Mantén alimentación estable y evita suspender el equipo o desconectar la unidad.
+
+Consultar progreso DST
+
+Pulsa este botón para leer el estado actual. El mensaje de que la prueba se ha solicitado correctamente no significa que ya haya terminado. La GUI no refresca el progreso de forma periódica: vuelve a pulsar cuando quieras consultarlo.
+
+Historial de pruebas DST
+
+Cuando la prueba termine, revisa la entrada más reciente y su resultado. Un fallo, una interrupción y una prueba aprobada no son lo mismo. Guarda el registro si vas a solicitar ayuda.
+
+Cómo interpretar el final
+
+Consulta finalizada correctamente se refiere a la lectura del progreso o historial, no al resultado de la prueba que aparece dentro de ese historial. Lee las líneas anteriores. Si necesitas detener una prueba, consulta la opción de aborto DST que anuncie tu módulo y su ayuda. No desenchufes el disco como método de cancelación.
+
+No confundas estos botones con funciones que contengan Clean, repair, write, erase o sanitize. Algunas pueden modificar sectores o borrar datos. Una autoprueba tampoco sustituye a una copia de seguridad.
+
+06 · Todas las opciones, paso a paso
+
+Esta pestaña construye la petición mediante controles gráficos. Lee las opciones del ejecutable instalado; no utiliza una lista fija. Que una opción aparezca en el catálogo no garantiza que tu disco la admita.
+
+Preparar una operación
+
+1. Selecciona el disco arriba y el módulo en Herramienta.
+2. Busca una opción por nombre o por palabras de su descripción.
+3. Selecciónala y lee la ayuda original que aparece a la derecha.
+4. Introduce sus valores: un argumento por línea, sin comillas añadidas. Si no pide valor, deja el campo vacío.
+5. Pulsa Añadir opción. Comprueba la lista preparada.
+6. Pulsa Revisar y ejecutar y revisa la unidad, los argumentos y la confirmación que aparezca.
+
+Ejemplo de consulta
+
+Módulo SMART; opción --smartAttributes; valor hybrid. Añade esa opción y ejecútala. Si la versión instalada no anuncia ese valor, sigue su ayuda. En un disco que contiene Windows, usa el botón Atributos SMART de Tareas habituales: esta versión bloquea las operaciones avanzadas sobre ese disco.
+
+Corregir antes de ejecutar
+
+Quitar seleccionada retira un elemento de la lista preparada. Vaciar elimina toda esa lista: no borra datos del disco. Usa Vaciar entre operaciones independientes, porque las opciones permanecen preparadas y podrían volver a ejecutarse juntas. El campo de valores corresponde a la opción que vas a añadir, no modifica por sí solo una opción ya añadida.
+
+Archivos y selección de disco
+
+Elegir archivo introduce una ruta para opciones que esperan un archivo. Una ruta con espacios ocupa una sola línea, sin comillas extra. Mantén Aplicar al disco seleccionado para operar sobre la unidad elegida. Desmárcalo únicamente para consultas globales como --help, --version o --scan. No añadas --device ni -d manualmente; la GUI gestiona ese argumento. No se admiten lotes ni el destino all.
+
+Confirmación y límites
+
+Algunas operaciones requieren escribir EJECUTAR y el identificador mostrado. Si la ayuda pide --confirm, añádelo con su valor exacto: la GUI no lo inventa. Las combinaciones y los límites dependen del firmware; consulta Ayuda > Ver ayuda completa del módulo. --scan y --Scan son opciones distintas.
+
+07 · Más ajustes de energía
+
+PowerControl reúne las consultas y ajustes de consumo. Para el objetivo habitual de reducir reposos, sigue primero las secciones 01 y 02. No combines todos los ajustes de esta página como una receta.
+
+Estado de energía
+
+El botón Estado de energía consulta el estado que comunica la unidad. Algunas interfaces no pueden informar de él en todas las situaciones. Un estado activo puntual no demuestra que se haya eliminado un temporizador.
+
+Temporizadores EPC individuales
+
+Opciones como --idle_a, --idle_b, --idle_c, --standby_y y --standby_z permiten configurar estados concretos si están admitidos. Su ayuda distingue enable, disable, default y temporizadores en milisegundos. Algunos estados reducen la electrónica; otros descargan cabezales o reducen/paran el giro, según el modelo. Consulta el manual de tu disco antes de decidir qué estado cambiar.
+
+En esas opciones EPC, la ayuda indica ajustes guardados salvo uso de --volatile. No generalices esa persistencia a todas las opciones de energía. Anota los valores antes de cambiarlos y comprueba los estados actuales y guardados después de reiniciar.
+
+Funciones que no mantienen el disco despierto
+
+--spinDown solicita detener el giro; --transitionPower cambia a un estado específico. No son soluciones para impedir reposos. El estado sleep puede requerir un reinicio del dispositivo para volver a responder. El temporizador antiguo --standby tiene restricciones distintas en ATA y SAS: no copies indiscriminadamente un ejemplo de SAS a un HDD SATA.
+
+Ajustes para casos específicos
+
+PowerBalance y los límites de consumo sirven para equilibrar rendimiento y energía en ciertos modelos. La telemetría de potencia depende del dispositivo. DIPM/DAPS, PUIS, estados NVMe y enlaces SAS son ajustes de comunicación o arranque especializados; un valor inadecuado puede hacer que la unidad deje de responder o de aparecer. No los necesitas para completar la guía rápida.
+
+08 · Registros, pruebas y firmware
+
+Logs e Info: obtener más detalles
+
+Info amplía la identificación y los datos que expone el dispositivo. Logs permite consultar o guardar registros técnicos. SMART puede ofrecer FARM en Seagate compatibles: son métricas de funcionamiento y fiabilidad para un análisis más detallado. Si una opción guarda un archivo, consulta su ayuda para elegir formato y destino.
+
+GenericTests: comprobar accesos al disco
+
+Incluye pruebas de lectura, verificación y otras variantes. No todas son equivalentes: algunas escriben o intentan reparar sectores. Para una primera comprobación, utiliza antes SMART y DST. Si eliges GenericTests, verifica que el modo sea de lectura y que no hayas añadido opciones write o repair. La duración puede ser elevada; no es una aplicación de recuperación de archivos.
+
+Configure: cambiar características
+
+Agrupa ajustes como cachés, comportamiento y otras funciones admitidas. No es un botón de optimización automática. Cambiar cachés puede afectar rendimiento y protección frente a cortes eléctricos; modificar límites de capacidad puede hacer inaccesibles datos existentes. Conserva el estado original y cambia solo una opción que entiendas.
+
+Firmware: actualizar el programa interno
+
+Firmware puede cargar una actualización suministrada para el modelo y variante exactos. No adivines un archivo ni uses el de un disco parecido. Comprueba antes las instrucciones oficiales, la versión instalada, la alimentación y la compatibilidad de la conexión USB. Una actualización fallida puede dejar la unidad inutilizable.
+
+El flujo gráfico consiste en elegir Firmware, consultar su ayuda, seleccionar la opción de descarga/actualización que corresponda y aportar el archivo oficial mediante Elegir archivo. El modo de descarga y la activación varían; esta guía no propone una combinación universal. Copia tus datos antes y no interrumpas el proceso. Solo reinicia cuando lo indiquen las instrucciones del fabricante.
+
+09 · Borrado, formato y seguridad
+
+Estas funciones pueden destruir datos o impedir su acceso. Están explicadas para que sepas reconocerlas, no para ejecutarlas como mantenimiento rutinario. Revisa la copia de seguridad y el número de serie antes de preparar una operación.
+
+Erase: eliminar el contenido
+
+Incluye mecanismos de borrado y sanitización, según el disco: sobreescritura, borrado de bloques, borrado criptográfico y otros. Borrar una partición o dar formato rápido en Windows no equivale necesariamente a eliminar de forma segura todos los datos. Para vender una unidad, el método adecuado depende de su tecnología y de lo que admita.
+
+Empieza por consultar las capacidades de borrado que anuncie el módulo. No ejecutes erase, sanitize, TRIM/UNMAP o writeSame para intentar acelerar un disco con datos. No se garantiza la recuperación después de estas operaciones. Comprueba su progreso y su resultado final antes de dar un borrado por terminado.
+
+Format: formato del dispositivo
+
+Puede cambiar el formato de sectores y otras características de bajo nivel. No es el formato de archivos NTFS/exFAT del Explorador. Los cambios de sector, capacidad o distribución pueden destruir datos o hacer que el sistema deje de reconocerlos. Consulta primero los formatos compatibles y el procedimiento específico del modelo.
+
+Security: bloqueo y contraseñas
+
+Gestiona funciones de seguridad que algunos discos incorporan. Activar una contraseña puede bloquear el acceso; perderla puede impedir recuperar los datos. No es lo mismo que BitLocker ni un sustituto automático del cifrado de Windows. No introduzcas contraseñas de prueba sin conocer cómo desactivar el bloqueo.
+
+Mientras una operación está en curso
+
+La GUI bloquea el cierre mientras espera al proceso. Algunas tareas siguen dentro del disco después de que el programa devuelva el control. Solicitud procesada sin errores no confirma que el borrado o formato haya terminado: lee la salida y consulta el progreso que ofrezca el módulo. No fuerces la desconexión ni uses un apagado como botón de cancelar.
+
+10 · Módulos especializados
+
+Los módulos disponibles dependen de la distribución. El selector elimina el prefijo openSeaChest_ del nombre. Esta sección completa el mapa de herramientas; una opción no disponible en tu versión no se puede ejecutar desde la GUI.
+
+NVMe
+
+Agrupa funciones específicas de SSD NVMe, como consultas de controlador, características y operaciones administrativas. Utiliza primero Salud NVMe para una comprobación sencilla. Los cambios de espacios de nombres o configuración son tareas especializadas y pueden afectar datos o disponibilidad.
+
+Defect
+
+Consulta y, con determinadas opciones, gestiona información de defectos o elementos físicos del disco. No repara mágicamente un soporte dañado. Algunas acciones retiran capacidad o afectan a sectores; consulta el procedimiento y sus consecuencias antes de usarlas.
+
+Reservations
+
+Gestiona reservas de acceso, principalmente en entornos de almacenamiento compartido. Una reserva puede impedir que otro equipo acceda al dispositivo. Normalmente no es necesaria para un disco USB doméstico.
+
+ZBD
+
+Está destinado a dispositivos que organizan el almacenamiento en zonas. No es una herramienta general para optimizar cualquier disco SMR. Cerrar, finalizar o reiniciar zonas tiene efectos concretos y algunas operaciones pueden hacer perder datos. Solo tiene sentido con hardware y software compatibles.
+
+PassthroughTest
+
+Ayuda a estudiar qué comandos atraviesan una controladora o un adaptador. Está orientado al diagnóstico de compatibilidad. No convierte un puente USB en compatible ni debe ejecutarse suponiendo que todas sus pruebas son inocuas. Lee la descripción de la prueba exacta.
+
+Raw
+
+Permite enviar comandos de bajo nivel. Requiere conocer el protocolo y cada campo del comando. Una orden incorrecta puede cambiar o borrar datos, bloquear la unidad o devolver información difícil de interpretar. No lo uses para seguir una recomendación genérica de rendimiento.
+
+Mapa de prioridades
+
+Uso habitual: Basics, SMART, Info y Logs. Energía: PowerControl. Diagnóstico adicional: GenericTests. Cambios concretos: Configure y Firmware. Operaciones destructivas o delicadas: Erase, Format y Security. Especialistas: NVMe, Defect, Reservations, ZBD, PassthroughTest y Raw.
+
+11 · Resultados y problemas frecuentes
+
+Los mensajes de la GUI
+
+Consulta finalizada correctamente: terminó la petición de información; lee los datos para conocer la salud. Prueba solicitada correctamente: consulta después Progreso DST e Historial. Solicitud procesada sin errores: terminó la petición avanzada, pero su efecto o progreso se explica en la salida. No se pudo completar la operación: revisa el motivo y el código indicado. La operación se ha cancelado: no la des por completada.
+
+No aparecen discos o falta información
+
+Comprueba permisos de administrador, alimentación y conexión. Pulsa Buscar discos después de conectar una unidad. Si hay cero módulos, utiliza Elegir carpeta y selecciona donde estén los EXE de Seagate. Si Windows no facilita letras o capacidad, puede aparecer n/d sin que falle la detección del disco. Un RAID o un puente USB puede ocultar la unidad física o limitar los datos.
+
+Operación no compatible
+
+No significa necesariamente que el disco esté averiado. Puede faltar la función, estar restringida por el firmware o no pasar a través del adaptador. Comprueba la ayuda de ese módulo y la conexión; no añadas parámetros aleatorios para forzarla.
+
+El disco ha cambiado o el ejecutable se ha modificado
+
+La GUI vuelve a comprobar la identidad antes de operar. Tras conectar o desconectar unidades, busca de nuevo y selecciona el disco correcto. Si has sustituido los programas de openSeaChest, elige otra vez su carpeta para recargar herramientas y ayuda.
+
+Guardar información para pedir ayuda
+
+Pulsa Guardar registro y conserva el TXT con el resultado completo visible. El búfer tiene un límite: los mensajes más antiguos pueden descartarse. Los archivos generados por herramientas van por defecto a %LOCALAPPDATA%\SeaChestGUI\Resultados, salvo que hayas indicado otro destino. Incluye versión de la GUI, versión del módulo, conexión SATA/USB y qué botón u opción utilizaste. Revisa y oculta datos privados antes de compartir números de serie, rutas o registros.
+
+Lo que esta interfaz no hace
+
+No recupera archivos eliminados, no repara daños mecánicos, no garantiza la salud futura ni calcula por sí sola cuánto le queda de vida al disco. Tampoco traduce toda la salida de Seagate: los mensajes originales y la ayuda de cada opción pueden aparecer en inglés.
+
+12 · Créditos, licencias y enlaces
+
+SeaChest GUI · LaNaveRETRO · versión 0.1.8 · Guía en español, 13/10/2026. Interfaz independiente desarrollada para LaNaveRETRO con asistencia de OpenAI/Codex. No es un producto oficial de Seagate ni implica patrocinio o aprobación de Seagate, Microsoft, Mozilla u OpenAI.
+
+Componentes y condiciones
+
+El código original de esta interfaz y el texto original de la guía se distribuyen con licencia MIT; el código fuente está en src y la fuente de la guía en docs. MIT no concede derechos sobre marcas ni cambia las licencias de terceros. El texto completo está en LICENCIAS/SeaChestGUI-MIT.txt.
+
+openSeaChest: Copyright (c) 2014-2026 Seagate Technology LLC and/or its Affiliates. El proyecto declara Mozilla Public License 2.0 y avisos adicionales, incluido Open Fabrics NVMe IOCTL. Se adjunta sin modificar su LICENSE.md de v26.09-alpha-zbd. Esta GUI invoca los EXE externos: el ZIP del frontend no contiene binarios ni bibliotecas de Seagate. Los proyectos opensea-common, opensea-transport, opensea-operations y opensea-jsonformat forman parte del entorno upstream; sus avisos pertenecen a sus respectivos autores.
+
+El PDF incorpora subconjuntos de DejaVu Sans: copyright Bitstream, Inc.; los cambios DejaVu son de dominio público, sujetos al aviso de fuentes adjunto. Windows y .NET Framework son de Microsoft; se utilizan como requisitos del sistema, no se redistribuyen aquí. Seagate, openSeaChest y demás nombres se mencionan solo para identificar sus productos. Se incluyen textos de licencia completos como anexos del PDF y en LICENCIAS.
+
+Si distribuyes el frontend junto a Seagate
+
+Conserva todos los avisos y licencias originales de la distribución concreta de openSeaChest y facilita a los destinatarios acceso a su código fuente correspondiente conforme a sus licencias. No sustituyas esos avisos por los de la GUI. Si cambias la versión de los binarios o sus componentes, revisa también sus avisos; la copia adjunta corresponde a v26.09-alpha-zbd. La entrega de esta guía no certifica por sí sola cualquier futura redistribución.
+
+Enlaces oficiales y fuentes
+
+Proyecto y código fuente: https://github.com/Seagate/openSeaChest
+Descargas: https://github.com/Seagate/openSeaChest/releases
+Versión de referencia: https://github.com/Seagate/openSeaChest/tree/v26.09-alpha-zbd
+Documentación: https://github.com/Seagate/openSeaChest/wiki
+Incidencias del motor: https://github.com/Seagate/openSeaChest/issues
+Licencia upstream: https://github.com/Seagate/openSeaChest/blob/v26.09-alpha-zbd/LICENSE.md
+MPL 2.0 y preguntas frecuentes: https://www.mozilla.org/en-US/MPL/2.0/
+Temporizador Windows: https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/disk-settings-disk-idle-timeout
+LaNaveRETRO: https://www.LaNaveRETRO.com
+
+Las instrucciones de energía se contrastaron con la ayuda oficial de PowerControl del tag v26.09-alpha-zbd (commit c858a3800eeafe8ab73350602066e683dee698b6). La ayuda del ejecutable instalado y el manual del modelo prevalecen si hay diferencias. Este documento cubre los flujos de la GUI y las familias de funciones, no sustituye la referencia técnica de cada combinación de argumentos.
+
+Anexo A · Licencia de la GUI
+
+MIT License
+
+Copyright (c) 2026 LaNaveRETRO
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Anexo B · Licencias de openSeaChest
+
+OpenSeaChest Licensing
+
+OpenSeaChest is licensed under the Mozilla Public License 2.0 Some files/libraries used have additional licenses described below.
+
+Mozilla Public License Version 2.0
+
+1. Definitions
+
+1.1. “Contributor” means each individual or legal entity that creates, contributes to the creation of, or owns Covered Software.
+
+1.2. “Contributor Version” means the combination of the Contributions of others (if any) used by a Contributor and that particular Contributor's Contribution.
+
+1.3. “Contribution” means Covered Software of a particular Contributor.
+
+1.4. “Covered Software” means Source Code Form to which the initial Contributor has attached the notice in Exhibit A, the Executable Form of such Source Code Form, and Modifications of such Source Code Form, in each case including portions thereof.
+
+1.5. “Incompatible With Secondary Licenses” means
+
+* (a) that the initial Contributor has attached the notice described in Exhibit B to the Covered Software; or * (b) that the Covered Software was made available under the terms of version 1.1 or earlier of the License, but not also under the terms of a Secondary License.
+
+1.6. “Executable Form” means any form of the work other than Source Code Form.
+
+1.7. “Larger Work” means a work that combines Covered Software with other material, in a separate file or files, that is not Covered Software.
+
+1.8. “License” means this document.
+
+1.9. “Licensable” means having the right to grant, to the maximum extent possible, whether at the time of the initial grant or subsequently, any and all of the rights conveyed by this License.
+
+1.10. “Modifications” means any of the following:
+
+* (a) any file in Source Code Form that results from an addition to, deletion from, or modification of the contents of Covered Software; or * (b) any new file in Source Code Form that contains any Covered Software.
+
+1.11. “Patent Claims” of a Contributor means any patent claim(s), including without limitation, method, process, and apparatus claims, in any patent Licensable by such Contributor that would be infringed, but for the grant of the License, by the making, using, selling, offering for sale, having made, import, or transfer of either its Contributions or its Contributor Version.
+
+1.12. “Secondary License” means either the GNU General Public License, Version 2.0, the GNU Lesser General Public License, Version 2.1, the GNU Affero General Public License, Version 3.0, or any later versions of those licenses.
+
+1.13. “Source Code Form” means the form of the work preferred for making modifications.
+
+1.14. “You” (or “Your”) means an individual or a legal entity exercising rights under this License. For legal entities, “You” includes any entity that controls, is controlled by, or is under common control with You. For purposes of this definition, “control” means(a) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (b) ownership of more than fifty percent (50%) of the outstanding shares or beneficial ownership of such entity.
+
+2. License Grants and Conditions
+
+2.1. Grants
+
+Each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license:
+
+* (a) under intellectual property rights (other than patent or trademark) Licensable by such Contributor to use, reproduce, make available, modify, display, perform, distribute, and otherwise exploit its Contributions, either on an unmodified basis, with Modifications, or as part of a Larger Work; and * (b) under Patent Claims of such Contributor to make, use, sell, offer for sale, have made, import, and otherwise transfer either its Contributions or its Contributor Version.
+
+2.2. Effective Date
+
+The licenses granted in Section 2.1 with respect to any Contribution become effective for each Contribution on the date the Contributor first distributes such Contribution.
+
+2.3. Limitations on Grant Scope
+
+The licenses granted in this Section 2 are the only rights granted under this License. No additional rights or licenses will be implied from the distribution or licensing of Covered Software under this License. Notwithstanding Section 2.1(b) above, no patent license is granted by a Contributor:
+
+* (a) for any code that a Contributor has removed from Covered Software; or * (b) for infringements caused by: (i) Your and any other third party's modifications of Covered Software, or (ii) the combination of its Contributions with other software (except as part of its Contributor Version); or * (c) under Patent Claims infringed by Covered Software in the absence of its Contributions.
+
+This License does not grant any rights in the trademarks, service marks, or logos of any Contributor (except as may be necessary to comply with the notice requirements in Section 3.4).
+
+2.4. Subsequent Licenses
+
+No Contributor makes additional grants as a result of Your choice to distribute the Covered Software under a subsequent version of this License (see Section 10.2) or under the terms of a Secondary License (if permitted under the terms of Section 3.3).
+
+2.5. Representation
+
+Each Contributor represents that the Contributor believes its Contributions are its original creation(s) or it has sufficient rights to grant the rights to its Contributions conveyed by this License.
+
+2.6. Fair Use
+
+This License is not intended to limit any rights You have under applicable copyright doctrines of fair use, fair dealing, or other equivalents.
+
+2.7. Conditions
+
+Sections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted in Section 2.1.
+
+3. Responsibilities
+
+3.1. Distribution of Source Form
+
+All distribution of Covered Software in Source Code Form, including any Modifications that You create or to which You contribute, must be under the terms of this License. You must inform recipients that the Source Code Form of the Covered Software is governed by the terms of this License, and how they can obtain a copy of this License. You may not attempt to alter or restrict the recipients' rights in the Source Code Form.
+
+3.2. Distribution of Executable Form
+
+If You distribute Covered Software in Executable Form then:
+
+* (a) such Covered Software must also be made available in Source Code Form, as described in Section 3.1, and You must inform recipients of the Executable Form how they can obtain a copy of such Source Code Form by reasonable means in a timely manner, at a charge no more than the cost of distribution to the recipient; and * (b) You may distribute such Executable Form under the terms of this License, or sublicense it under different terms, provided that the license for the Executable Form does not attempt to limit or alter the recipients' rights in the Source Code Form under this License.
+
+3.3. Distribution of a Larger Work
+
+You may create and distribute a Larger Work under terms of Your choice, provided that You also comply with the requirements of this License for the Covered Software. If the Larger Work is a combination of Covered Software with a work governed by one or more Secondary Licenses, and the Covered Software is not Incompatible With Secondary Licenses, this License permits You to additionally distribute such Covered Software under the terms of such Secondary License(s), so that the recipient of the Larger Work may, at their option, further distribute the Covered Software under the terms of either this License or such Secondary License(s).
+
+3.4. Notices
+
+You may not remove or alter the substance of any license notices (including copyright notices, patent notices, disclaimers of warranty, or limitations of liability) contained within the Source Code Form of the Covered Software, except that You may alter any license notices to the extent required to remedy known factual inaccuracies.
+
+3.5. Application of Additional Terms
+
+You may choose to offer, and to charge a fee for, warranty, support, indemnity or liability obligations to one or more recipients of Covered Software. However, You may do so only on Your own behalf, and not on behalf of any Contributor. You must make it absolutely clear that any such warranty, support, indemnity, or liability obligation is offered by You alone, and You hereby agree to indemnify every Contributor for any liability incurred by such Contributor as a result of warranty, support, indemnity or liability terms You offer. You may include additional disclaimers of warranty and limitations of liability specific to any jurisdiction.
+
+4. Inability to Comply Due to Statute or Regulation
+
+If it is impossible for You to comply with any of the terms of this License with respect to some or all of the Covered Software due to statute, judicial order, or regulation then You must: (a) comply with the terms of this License to the maximum extent possible; and (b) describe the limitations and the code they affect. Such description must be placed in a text file included with all distributions of the Covered Software under this License. Except to the extent prohibited by statute or regulation, such description must be sufficiently detailed for a recipient of ordinary skill to be able to understand it.
+
+5. Termination
+
+5.1. The rights granted under this License will terminate automatically if You fail to comply with any of its terms. However, if You become compliant, then the rights granted under this License from a particular Contributor are reinstated (a) provisionally, unless and until such Contributor explicitly and finally terminates Your grants, and (b) on an ongoing basis, if such Contributor fails to notify You of the non-compliance by some reasonable means prior to 60 days after You have come back into compliance. Moreover, Your grants from a particular Contributor are reinstated on an ongoing basis if such Contributor notifies You of the non-compliance by some reasonable means, this is the first time You have received notice of non-compliance with this License from such Contributor, and You become compliant prior to 30 days after Your receipt of the notice.
+
+5.2. If You initiate litigation against any entity by asserting a patent infringement claim (excluding declaratory judgment actions, counter-claims, and cross-claims) alleging that a Contributor Version directly or indirectly infringes any patent, then the rights granted to You by any and all Contributors for the Covered Software under Section 2.1 of this License shall terminate.
+
+5.3. In the event of termination under Sections 5.1 or 5.2 above, all end user license agreements (excluding distributors and resellers) which have been validly granted by You or Your distributors under this License prior to termination shall survive termination.
+
+6. Disclaimer of Warranty
+
+Covered Software is provided under this License on an “as is” basis, without warranty of any kind, either expressed, implied, or statutory, including, without limitation, warranties that the Covered Software is free of defects, merchantable, fit for a particular purpose or non-infringing. The entire risk as to the quality and performance of the Covered Software is with You. Should any Covered Software prove defective in any respect, You (not any Contributor) assume the cost of any necessary servicing, repair, or correction. This disclaimer of warranty constitutes an essential part of this License. No use of any Covered Software is authorized under this License except under this disclaimer.
+
+7. Limitation of Liability
+
+Under no circumstances and under no legal theory, whether tort (including negligence), contract, or otherwise, shall any Contributor, or anyone who distributes Covered Software as permitted above, be liable to You for any direct, indirect, special, incidental, or consequential damages of any character including, without limitation, damages for lost profits, loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses, even if such party shall have been informed of the possibility of such damages. This limitation of liability shall not apply to liability for death or personal injury resulting from such party's negligence to the extent applicable law prohibits such limitation. Some jurisdictions do not allow the exclusion or limitation of incidental or consequential damages, so this exclusion and limitation may not apply to You.
+
+8. Litigation
+
+Any litigation relating to this License may be brought only in the courts of a jurisdiction where the defendant maintains its principal place of business and such litigation shall be governed by laws of that jurisdiction, without reference to its conflict-of-law provisions. Nothing in this Section shall prevent a party's ability to bring cross-claims or counter-claims.
+
+9. Miscellaneous
+
+This License represents the complete agreement concerning the subject matter hereof. If any provision of this License is held to be unenforceable, such provision shall be reformed only to the extent necessary to make it enforceable. Any law or regulation which provides that the language of a contract shall be construed against the drafter shall not be used to construe this License against a Contributor.
+
+10. Versions of the License
+
+10.1. New Versions
+
+Mozilla Foundation is the license steward. Except as provided in Section 10.3, no one other than the license steward has the right to modify or publish new versions of this License. Each version will be given a distinguishing version number.
+
+10.2. Effect of New Versions
+
+You may distribute the Covered Software under the terms of the version of the License under which You originally received the Covered Software, or under the terms of any subsequent version published by the license steward.
+
+10.3. Modified Versions
+
+If you create software not governed by this License, and you want to create a new license for such software, you may create and use a modified version of this License if you rename the license and remove any references to the name of the license steward (except to note that such modified license differs from this License).
+
+10.4. Distributing Source Code Form that is Incompatible With Secondary Licenses
+
+If You choose to distribute Source Code Form that is Incompatible With Secondary Licenses under the terms of this version of the License, the notice described in Exhibit B of this License must be attached.
+
+Exhibit A - Source Code Form License Notice
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+If it is not possible or desirable to put the notice in a particular file, then You may include the notice in a location (such as a LICENSE file in a relevant directory) where a recipient would be likely to look for such a notice.
+
+You may add additional accurate notices of copyright ownership.
+
+Exhibit B - “Incompatible With Secondary Licenses” Notice
+
+This Source Code Form is "Incompatible With Secondary Licenses", as defined by the Mozilla Public License, v. 2.0.
+
+Open Fabrics NVMe IOCTL (Windows Only)
+
+In Windows builds, the open fabrics NVMe IOCTL support is included under the following license
+
+OFNVME License
+
+Copyright (c) 2011-2012
+
+Integrated Device Technology, Inc. Intel Corporation LSI Corporation
+
+All rights reserved.
+
+---
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The views and conclusions contained in the software and documentation are those of the authors and should not be interpreted as representing official policies, either expressed or implied, of Intel Corporation, Integrated Device Technology Inc., or Sandforce Corporation.
+
+Anexo C · Fuentes del PDF
+
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/ Upstream-Name: DejaVu fonts Upstream-Author: Stepan Roh <src@users.sourceforge.net> (original author), see /usr/share/doc/fonts-dejavu-core/AUTHORS for full list Source: https://dejavu-fonts.github.io/
+
+Files: * Copyright: Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a trademark of Bitstream, Inc. DejaVu changes are in public domain. License: bitstream-vera Permission is hereby granted, free of charge, to any person obtaining a copy of the fonts accompanying this license ("Fonts") and associated documentation files (the "Font Software"), to reproduce and distribute the Font Software, including without limitation the rights to use, copy, merge, publish, distribute, and/or sell copies of the Font Software, and to permit persons to whom the Font Software is furnished to do so, subject to the following conditions: . The above copyright and trademark notices and this permission notice shall be included in all copies of one or more of the Font Software typefaces. . The Font Software may be modified, altered, or added to, and in particular the designs of glyphs or characters in the Fonts may be modified and additional glyphs or characters may be added to the Fonts, only if the fonts are renamed to names not containing either the words "Bitstream" or the word "Vera". . This License becomes null and void to the extent applicable to Fonts or Font Software that has been modified and is distributed under the "Bitstream Vera" names. . The Font Software may be sold as part of a larger software package but no copy of one or more of the Font Software typefaces may be sold by itself. . THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE. . Except as contained in this notice, the names of Gnome, the Gnome Foundation, and Bitstream Inc., shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Font Software without prior written authorization from the Gnome Foundation or Bitstream Inc., respectively. For further information, contact: fonts at gnome dot org.

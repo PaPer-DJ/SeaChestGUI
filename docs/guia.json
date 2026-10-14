@@ -1,0 +1,590 @@
+[
+  {
+    "title": "01 · Evitar reposos: inicio rápido",
+    "blocks": [
+      [
+        "p",
+        "Si simplemente quieres usar esta herramienta para reducir los reposos, las esperas al acceder a tu disco duro Seagate y los aparcamientos de cabezales asociados al ahorro de energía, empieza por estos pasos."
+      ],
+      [
+        "tip",
+        "Esto puede mejorar la respuesta de un HDD compatible. No garantiza alargar su vida útil ni elimina todos los aparcamientos. Mantenerlo activo aumenta el consumo y puede elevar la temperatura. Si hay errores de lectura o ruidos anormales, consulta primero la sección de salud."
+      ],
+      [
+        "h",
+        "1. Elige el disco correcto"
+      ],
+      [
+        "p",
+        "Abre SeaChestGUI.exe y acepta el aviso de administrador. Espera la búsqueda automática. En el desplegable, comprueba capacidad, modelo y número de serie; la letra de Windows es una ayuda adicional. Pulsa Información del disco y guarda el registro antes de cambiar nada. Esta guía rápida es para discos HDD de datos, no para aplicar a ciegas a SSD o NVMe."
+      ],
+      [
+        "h",
+        "2. Comprueba si admite EPC"
+      ],
+      [
+        "p",
+        "EPC significa condiciones de energía ampliadas; en algunos Seagate se relaciona con PowerChoice. Busca esa compatibilidad en Información del disco. En Todas las opciones, elige PowerControl. Busca --showEPCSettings, selecciónala, deja vacío el campo de valores y pulsa Añadir opción. Mantén marcada Aplicar al disco seleccionado. Pulsa Revisar y ejecutar, comprueba la unidad y confirma con la frase que muestra la aplicación. Guarda el resultado como referencia."
+      ],
+      [
+        "h",
+        "3. Desactiva EPC solo si es compatible"
+      ],
+      [
+        "p",
+        "Pulsa Vaciar para quitar la consulta anterior de la lista preparada. Busca --EPCfeature. En el campo de valores escribe únicamente disable, pulsa Añadir opción y después Revisar y ejecutar. Revisa modelo y serie antes de confirmar. No pegues una línea de consola: la GUI ya añade la herramienta y el disco."
+      ],
+      [
+        "h",
+        "4. Comprueba el resultado"
+      ],
+      [
+        "p",
+        "Vacía de nuevo la lista y repite --showEPCSettings; consulta también Información del disco. Revisa los estados que indique el dispositivo. Una operación no compatible no confirma un cambio. No fuerces opciones si el adaptador o el disco las rechaza. Continúa con la siguiente sección para APM, Windows y cómo deshacer los ajustes."
+      ],
+      [
+        "tip",
+        "La GUI bloquea las operaciones avanzadas sobre el disco que identifica como disco de Windows, incluso algunas consultas de esa pestaña. Si aparece ese aviso, este procedimiento no se puede aplicar desde esta versión. No se debe intentar eludir la protección."
+      ]
+    ]
+  },
+  {
+    "title": "02 · APM, comprobación y vuelta atrás",
+    "blocks": [
+      [
+        "h",
+        "5. APM es otro ajuste, y no siempre existe"
+      ],
+      [
+        "p",
+        "APM es otra forma de ahorro de energía de algunos discos SATA. Si EPC no existe o aún hay esperas, consulta su compatibilidad. En PowerControl, Vaciar, busca --showAPMLevel, deja los valores vacíos, Añadir opción y Revisar y ejecutar. Guarda el nivel original. Si no es compatible, omite este paso."
+      ],
+      [
+        "p",
+        "Si el disco admite desactivar APM, usa --disableAPM sin valor y ejecútala sola. Después consulta --showAPMLevel otra vez. Si admite APM pero no permite desactivarlo, --setAPMLevel con el valor 254 solicita el nivel de máximo rendimiento. No equivale a desactivar todos los mecanismos de reposo y no es un remedio universal. Comprueba siempre la respuesta del disco."
+      ],
+      [
+        "h",
+        "6. Revisa Windows y la carcasa USB"
+      ],
+      [
+        "p",
+        "Windows puede ordenar que el disco se apague aunque hayas cambiado EPC o APM. En Windows 10, abre Panel de control > Opciones de energía > Cambiar la configuración del plan > Cambiar la configuración avanzada de energía. Si aparece Disco duro > Apagar el disco duro tras, guarda el valor anterior y selecciona Nunca (0 minutos) para el plan que utilizas. Es un ajuste del plan, no exclusivo del disco elegido en la GUI; puede aumentar el consumo de otros discos."
+      ],
+      [
+        "p",
+        "Una carcasa USB puede tener su propio temporizador y bloquear comandos SATA. Si el problema continúa, comprueba su documentación. La GUI no puede garantizar que una caja USB mantenga el disco despierto. Tampoco evita que se suspenda todo el PC."
+      ],
+      [
+        "h",
+        "7. Verifica que el cambio se conserva"
+      ],
+      [
+        "p",
+        "Deja el disco inactivo el tiempo que antes provocaba la espera y prueba a acceder a un archivo. Cuando no haya operaciones pendientes, comprueba los ajustes tras reiniciar y, si procede, después de apagar y encender la unidad de forma segura. La persistencia depende del modelo, firmware y conexión. No se añade una tarea automática de Windows ni es necesario dejar esta GUI abierta para mantener un ajuste que el disco haya guardado."
+      ],
+      [
+        "h",
+        "Cómo volver atrás"
+      ],
+      [
+        "p",
+        "Si EPC estaba activado, usa --EPCfeature con enable y comprueba el resultado. Para APM, usa --setAPMLevel con el nivel original que guardaste; si estaba desactivado, usa --disableAPM. Restaura también el valor previo del plan de Windows si lo cambiaste. No apliques default a todos los temporizadores: sus valores de fábrica pueden ser distintos de los que tenías."
+      ]
+    ]
+  },
+  {
+    "title": "03 · Primeros pasos y orientación",
+    "blocks": [
+      [
+        "p",
+        "Para el resto de operaciones, aquí tienes una guía completa de las funciones de la interfaz y de las principales familias de herramientas, ordenada desde las consultas habituales hasta los cambios más delicados. Las opciones exactas dependen de los ejecutables que tengas instalados; su ayuda integrada es la referencia para cada parámetro."
+      ],
+      [
+        "h",
+        "Instalar y actualizar"
+      ],
+      [
+        "p",
+        "Descarga la distribución oficial de openSeaChest para Windows desde el enlace de Descargas de la sección Créditos. Extrae el paquete y copia SeaChestGUI.exe y SeaChestGUI.exe.config junto a openSeaChest_Basics.exe. Conserva también este PDF y la carpeta LICENCIAS. Requiere Windows 10/11 y .NET Framework 4.8. No necesitas usar consola ni PowerShell. Para actualizar, cierra la GUI antes de sustituir sus archivos."
+      ],
+      [
+        "h",
+        "Localizar y reconocer las unidades"
+      ],
+      [
+        "p",
+        "La búsqueda se inicia al abrir. Si conectas o desconectas un USB, pulsa Buscar discos. Elegir carpeta permite localizar otra distribución; elige la carpeta que contiene sus EXE. La GUI trabaja con un disco cada vez. PD0, PD1, etc. son identificadores físicos y pueden cambiar al reconectar: confirma siempre modelo y serie."
+      ],
+      [
+        "p",
+        "Capacidad muestra el tamaño total del disco, no el espacio libre. GB y TB son decimales y pueden diferir de la cifra de Windows. Unidad puede mostrar varias letras si hay varias particiones. N/A indica que Windows no ha comunicado letras asignadas; Letras n/d o Capacidad n/d significan que no se pudo obtener ese dato. El disco puede seguir siendo utilizable por openSeaChest."
+      ],
+      [
+        "h",
+        "Dónde está cada cosa"
+      ],
+      [
+        "p",
+        "Tareas habituales: información, salud y diagnósticos con botones. Todas las opciones: catálogo de los módulos instalados. Guía de Uso: este documento por secciones, con acceso al PDF. Ayuda: recordatorios rápidos y ayuda original del módulo seleccionado."
+      ],
+      [
+        "p",
+        "Resultados muestra la salida de la herramienta y el mensaje final de la GUI. Guardar registro exporta lo visible a TXT; Limpiar vacía la pantalla cuando no hay una operación activa. Carpeta de resultados abre la ubicación utilizada por defecto para los archivos que generen las herramientas."
+      ]
+    ]
+  },
+  {
+    "title": "04 · Conocer el disco y su salud",
+    "blocks": [
+      [
+        "h",
+        "Información del disco"
+      ],
+      [
+        "p",
+        "Es el mejor punto de partida. Muestra identificación, firmware, capacidad y características que declara la unidad. En USB puede aparecer información de la carcasa junto a la del disco. Una consulta completada correctamente significa que se ha obtenido la información; no certifica que el disco esté sano."
+      ],
+      [
+        "h",
+        "Estado SMART"
+      ],
+      [
+        "p",
+        "Consulta el resumen de salud que ofrece la unidad. SMART es su sistema de vigilancia interna. Un resultado favorable no descarta todos los fallos. Si informa de un problema, prioriza una copia de los datos importantes antes de realizar pruebas largas o cambios."
+      ],
+      [
+        "h",
+        "Atributos SMART"
+      ],
+      [
+        "p",
+        "Muestra contadores y mediciones más detallados: temperatura, horas de uso y otros indicadores según el modelo. No compares los valores brutos de fabricantes distintos como si fueran equivalentes. Ciertos contadores aumentan de forma normal con el uso. Un contador de cargas y descargas de cabezales, cuando existe, debe interpretarse con el manual del modelo y su evolución, no con un umbral universal."
+      ],
+      [
+        "h",
+        "Estadísticas del dispositivo"
+      ],
+      [
+        "p",
+        "Permite consultar información de uso y actividad que el disco expone, como contadores de trabajo o lecturas y escrituras. Úsala para comparar registros tomados en distintas fechas; no es una prueba de velocidad ni un diagnóstico completo por sí sola."
+      ],
+      [
+        "h",
+        "Salud NVMe"
+      ],
+      [
+        "p",
+        "Está orientada a SSD NVMe. Puede mostrar avisos, temperatura y desgaste, según la unidad. Un HDD SATA no tiene por qué admitir esta consulta. Los porcentajes y unidades deben leerse tal como los define el fabricante."
+      ],
+      [
+        "h",
+        "Información SATA / SAT"
+      ],
+      [
+        "p",
+        "Ayuda a distinguir lo que comunica un disco SATA de lo que traduce un puente USB/SCSI. Es útil si un dato parece extraño o una función no llega al dispositivo. No cambia la conexión ni actualiza el adaptador."
+      ],
+      [
+        "tip",
+        "Si el disco se desconecta, hace ruidos anormales o tiene archivos irremplazables que ya no se pueden leer, no empieces por una prueba intensa ni por una reparación. Prioriza conservar o recuperar los datos."
+      ]
+    ]
+  },
+  {
+    "title": "05 · Pruebas de diagnóstico DST",
+    "blocks": [
+      [
+        "p",
+        "DST es una autoprueba que realiza el propio disco. Los botones de esta GUI solicitan una prueba corta o larga; no son botones de borrado ni de reparación."
+      ],
+      [
+        "h",
+        "Iniciar prueba corta DST"
+      ],
+      [
+        "p",
+        "Es una primera comprobación interna. Selecciona la unidad, pulsa el botón y acepta la confirmación. Su duración depende del dispositivo; no todos los discos o adaptadores permiten ejecutarla."
+      ],
+      [
+        "h",
+        "Iniciar prueba larga DST"
+      ],
+      [
+        "p",
+        "Es una comprobación más extensa y puede tardar horas, especialmente en discos grandes. Haz copia de los datos importantes antes de someter a pruebas una unidad sospechosa. Durante la prueba el acceso puede ser más lento. Mantén alimentación estable y evita suspender el equipo o desconectar la unidad."
+      ],
+      [
+        "h",
+        "Consultar progreso DST"
+      ],
+      [
+        "p",
+        "Pulsa este botón para leer el estado actual. El mensaje de que la prueba se ha solicitado correctamente no significa que ya haya terminado. La GUI no refresca el progreso de forma periódica: vuelve a pulsar cuando quieras consultarlo."
+      ],
+      [
+        "h",
+        "Historial de pruebas DST"
+      ],
+      [
+        "p",
+        "Cuando la prueba termine, revisa la entrada más reciente y su resultado. Un fallo, una interrupción y una prueba aprobada no son lo mismo. Guarda el registro si vas a solicitar ayuda."
+      ],
+      [
+        "h",
+        "Cómo interpretar el final"
+      ],
+      [
+        "p",
+        "Consulta finalizada correctamente se refiere a la lectura del progreso o historial, no al resultado de la prueba que aparece dentro de ese historial. Lee las líneas anteriores. Si necesitas detener una prueba, consulta la opción de aborto DST que anuncie tu módulo y su ayuda. No desenchufes el disco como método de cancelación."
+      ],
+      [
+        "tip",
+        "No confundas estos botones con funciones que contengan Clean, repair, write, erase o sanitize. Algunas pueden modificar sectores o borrar datos. Una autoprueba tampoco sustituye a una copia de seguridad."
+      ]
+    ]
+  },
+  {
+    "title": "06 · Todas las opciones, paso a paso",
+    "blocks": [
+      [
+        "p",
+        "Esta pestaña construye la petición mediante controles gráficos. Lee las opciones del ejecutable instalado; no utiliza una lista fija. Que una opción aparezca en el catálogo no garantiza que tu disco la admita."
+      ],
+      [
+        "h",
+        "Preparar una operación"
+      ],
+      [
+        "p",
+        "1. Selecciona el disco arriba y el módulo en Herramienta.\n2. Busca una opción por nombre o por palabras de su descripción.\n3. Selecciónala y lee la ayuda original que aparece a la derecha.\n4. Introduce sus valores: un argumento por línea, sin comillas añadidas. Si no pide valor, deja el campo vacío.\n5. Pulsa Añadir opción. Comprueba la lista preparada.\n6. Pulsa Revisar y ejecutar y revisa la unidad, los argumentos y la confirmación que aparezca."
+      ],
+      [
+        "h",
+        "Ejemplo de consulta"
+      ],
+      [
+        "p",
+        "Módulo SMART; opción --smartAttributes; valor hybrid. Añade esa opción y ejecútala. Si la versión instalada no anuncia ese valor, sigue su ayuda. En un disco que contiene Windows, usa el botón Atributos SMART de Tareas habituales: esta versión bloquea las operaciones avanzadas sobre ese disco."
+      ],
+      [
+        "h",
+        "Corregir antes de ejecutar"
+      ],
+      [
+        "p",
+        "Quitar seleccionada retira un elemento de la lista preparada. Vaciar elimina toda esa lista: no borra datos del disco. Usa Vaciar entre operaciones independientes, porque las opciones permanecen preparadas y podrían volver a ejecutarse juntas. El campo de valores corresponde a la opción que vas a añadir, no modifica por sí solo una opción ya añadida."
+      ],
+      [
+        "h",
+        "Archivos y selección de disco"
+      ],
+      [
+        "p",
+        "Elegir archivo introduce una ruta para opciones que esperan un archivo. Una ruta con espacios ocupa una sola línea, sin comillas extra. Mantén Aplicar al disco seleccionado para operar sobre la unidad elegida. Desmárcalo únicamente para consultas globales como --help, --version o --scan. No añadas --device ni -d manualmente; la GUI gestiona ese argumento. No se admiten lotes ni el destino all."
+      ],
+      [
+        "h",
+        "Confirmación y límites"
+      ],
+      [
+        "p",
+        "Algunas operaciones requieren escribir EJECUTAR y el identificador mostrado. Si la ayuda pide --confirm, añádelo con su valor exacto: la GUI no lo inventa. Las combinaciones y los límites dependen del firmware; consulta Ayuda > Ver ayuda completa del módulo. --scan y --Scan son opciones distintas."
+      ]
+    ]
+  },
+  {
+    "title": "07 · Más ajustes de energía",
+    "blocks": [
+      [
+        "p",
+        "PowerControl reúne las consultas y ajustes de consumo. Para el objetivo habitual de reducir reposos, sigue primero las secciones 01 y 02. No combines todos los ajustes de esta página como una receta."
+      ],
+      [
+        "h",
+        "Estado de energía"
+      ],
+      [
+        "p",
+        "El botón Estado de energía consulta el estado que comunica la unidad. Algunas interfaces no pueden informar de él en todas las situaciones. Un estado activo puntual no demuestra que se haya eliminado un temporizador."
+      ],
+      [
+        "h",
+        "Temporizadores EPC individuales"
+      ],
+      [
+        "p",
+        "Opciones como --idle_a, --idle_b, --idle_c, --standby_y y --standby_z permiten configurar estados concretos si están admitidos. Su ayuda distingue enable, disable, default y temporizadores en milisegundos. Algunos estados reducen la electrónica; otros descargan cabezales o reducen/paran el giro, según el modelo. Consulta el manual de tu disco antes de decidir qué estado cambiar."
+      ],
+      [
+        "p",
+        "En esas opciones EPC, la ayuda indica ajustes guardados salvo uso de --volatile. No generalices esa persistencia a todas las opciones de energía. Anota los valores antes de cambiarlos y comprueba los estados actuales y guardados después de reiniciar."
+      ],
+      [
+        "h",
+        "Funciones que no mantienen el disco despierto"
+      ],
+      [
+        "p",
+        "--spinDown solicita detener el giro; --transitionPower cambia a un estado específico. No son soluciones para impedir reposos. El estado sleep puede requerir un reinicio del dispositivo para volver a responder. El temporizador antiguo --standby tiene restricciones distintas en ATA y SAS: no copies indiscriminadamente un ejemplo de SAS a un HDD SATA."
+      ],
+      [
+        "h",
+        "Ajustes para casos específicos"
+      ],
+      [
+        "p",
+        "PowerBalance y los límites de consumo sirven para equilibrar rendimiento y energía en ciertos modelos. La telemetría de potencia depende del dispositivo. DIPM/DAPS, PUIS, estados NVMe y enlaces SAS son ajustes de comunicación o arranque especializados; un valor inadecuado puede hacer que la unidad deje de responder o de aparecer. No los necesitas para completar la guía rápida."
+      ]
+    ]
+  },
+  {
+    "title": "08 · Registros, pruebas y firmware",
+    "blocks": [
+      [
+        "h",
+        "Logs e Info: obtener más detalles"
+      ],
+      [
+        "p",
+        "Info amplía la identificación y los datos que expone el dispositivo. Logs permite consultar o guardar registros técnicos. SMART puede ofrecer FARM en Seagate compatibles: son métricas de funcionamiento y fiabilidad para un análisis más detallado. Si una opción guarda un archivo, consulta su ayuda para elegir formato y destino."
+      ],
+      [
+        "h",
+        "GenericTests: comprobar accesos al disco"
+      ],
+      [
+        "p",
+        "Incluye pruebas de lectura, verificación y otras variantes. No todas son equivalentes: algunas escriben o intentan reparar sectores. Para una primera comprobación, utiliza antes SMART y DST. Si eliges GenericTests, verifica que el modo sea de lectura y que no hayas añadido opciones write o repair. La duración puede ser elevada; no es una aplicación de recuperación de archivos."
+      ],
+      [
+        "h",
+        "Configure: cambiar características"
+      ],
+      [
+        "p",
+        "Agrupa ajustes como cachés, comportamiento y otras funciones admitidas. No es un botón de optimización automática. Cambiar cachés puede afectar rendimiento y protección frente a cortes eléctricos; modificar límites de capacidad puede hacer inaccesibles datos existentes. Conserva el estado original y cambia solo una opción que entiendas."
+      ],
+      [
+        "h",
+        "Firmware: actualizar el programa interno"
+      ],
+      [
+        "p",
+        "Firmware puede cargar una actualización suministrada para el modelo y variante exactos. No adivines un archivo ni uses el de un disco parecido. Comprueba antes las instrucciones oficiales, la versión instalada, la alimentación y la compatibilidad de la conexión USB. Una actualización fallida puede dejar la unidad inutilizable."
+      ],
+      [
+        "p",
+        "El flujo gráfico consiste en elegir Firmware, consultar su ayuda, seleccionar la opción de descarga/actualización que corresponda y aportar el archivo oficial mediante Elegir archivo. El modo de descarga y la activación varían; esta guía no propone una combinación universal. Copia tus datos antes y no interrumpas el proceso. Solo reinicia cuando lo indiquen las instrucciones del fabricante."
+      ]
+    ]
+  },
+  {
+    "title": "09 · Borrado, formato y seguridad",
+    "blocks": [
+      [
+        "tip",
+        "Estas funciones pueden destruir datos o impedir su acceso. Están explicadas para que sepas reconocerlas, no para ejecutarlas como mantenimiento rutinario. Revisa la copia de seguridad y el número de serie antes de preparar una operación."
+      ],
+      [
+        "h",
+        "Erase: eliminar el contenido"
+      ],
+      [
+        "p",
+        "Incluye mecanismos de borrado y sanitización, según el disco: sobreescritura, borrado de bloques, borrado criptográfico y otros. Borrar una partición o dar formato rápido en Windows no equivale necesariamente a eliminar de forma segura todos los datos. Para vender una unidad, el método adecuado depende de su tecnología y de lo que admita."
+      ],
+      [
+        "p",
+        "Empieza por consultar las capacidades de borrado que anuncie el módulo. No ejecutes erase, sanitize, TRIM/UNMAP o writeSame para intentar acelerar un disco con datos. No se garantiza la recuperación después de estas operaciones. Comprueba su progreso y su resultado final antes de dar un borrado por terminado."
+      ],
+      [
+        "h",
+        "Format: formato del dispositivo"
+      ],
+      [
+        "p",
+        "Puede cambiar el formato de sectores y otras características de bajo nivel. No es el formato de archivos NTFS/exFAT del Explorador. Los cambios de sector, capacidad o distribución pueden destruir datos o hacer que el sistema deje de reconocerlos. Consulta primero los formatos compatibles y el procedimiento específico del modelo."
+      ],
+      [
+        "h",
+        "Security: bloqueo y contraseñas"
+      ],
+      [
+        "p",
+        "Gestiona funciones de seguridad que algunos discos incorporan. Activar una contraseña puede bloquear el acceso; perderla puede impedir recuperar los datos. No es lo mismo que BitLocker ni un sustituto automático del cifrado de Windows. No introduzcas contraseñas de prueba sin conocer cómo desactivar el bloqueo."
+      ],
+      [
+        "h",
+        "Mientras una operación está en curso"
+      ],
+      [
+        "p",
+        "La GUI bloquea el cierre mientras espera al proceso. Algunas tareas siguen dentro del disco después de que el programa devuelva el control. Solicitud procesada sin errores no confirma que el borrado o formato haya terminado: lee la salida y consulta el progreso que ofrezca el módulo. No fuerces la desconexión ni uses un apagado como botón de cancelar."
+      ]
+    ]
+  },
+  {
+    "title": "10 · Módulos especializados",
+    "blocks": [
+      [
+        "p",
+        "Los módulos disponibles dependen de la distribución. El selector elimina el prefijo openSeaChest_ del nombre. Esta sección completa el mapa de herramientas; una opción no disponible en tu versión no se puede ejecutar desde la GUI."
+      ],
+      [
+        "h",
+        "NVMe"
+      ],
+      [
+        "p",
+        "Agrupa funciones específicas de SSD NVMe, como consultas de controlador, características y operaciones administrativas. Utiliza primero Salud NVMe para una comprobación sencilla. Los cambios de espacios de nombres o configuración son tareas especializadas y pueden afectar datos o disponibilidad."
+      ],
+      [
+        "h",
+        "Defect"
+      ],
+      [
+        "p",
+        "Consulta y, con determinadas opciones, gestiona información de defectos o elementos físicos del disco. No repara mágicamente un soporte dañado. Algunas acciones retiran capacidad o afectan a sectores; consulta el procedimiento y sus consecuencias antes de usarlas."
+      ],
+      [
+        "h",
+        "Reservations"
+      ],
+      [
+        "p",
+        "Gestiona reservas de acceso, principalmente en entornos de almacenamiento compartido. Una reserva puede impedir que otro equipo acceda al dispositivo. Normalmente no es necesaria para un disco USB doméstico."
+      ],
+      [
+        "h",
+        "ZBD"
+      ],
+      [
+        "p",
+        "Está destinado a dispositivos que organizan el almacenamiento en zonas. No es una herramienta general para optimizar cualquier disco SMR. Cerrar, finalizar o reiniciar zonas tiene efectos concretos y algunas operaciones pueden hacer perder datos. Solo tiene sentido con hardware y software compatibles."
+      ],
+      [
+        "h",
+        "PassthroughTest"
+      ],
+      [
+        "p",
+        "Ayuda a estudiar qué comandos atraviesan una controladora o un adaptador. Está orientado al diagnóstico de compatibilidad. No convierte un puente USB en compatible ni debe ejecutarse suponiendo que todas sus pruebas son inocuas. Lee la descripción de la prueba exacta."
+      ],
+      [
+        "h",
+        "Raw"
+      ],
+      [
+        "p",
+        "Permite enviar comandos de bajo nivel. Requiere conocer el protocolo y cada campo del comando. Una orden incorrecta puede cambiar o borrar datos, bloquear la unidad o devolver información difícil de interpretar. No lo uses para seguir una recomendación genérica de rendimiento."
+      ],
+      [
+        "h",
+        "Mapa de prioridades"
+      ],
+      [
+        "p",
+        "Uso habitual: Basics, SMART, Info y Logs. Energía: PowerControl. Diagnóstico adicional: GenericTests. Cambios concretos: Configure y Firmware. Operaciones destructivas o delicadas: Erase, Format y Security. Especialistas: NVMe, Defect, Reservations, ZBD, PassthroughTest y Raw."
+      ]
+    ]
+  },
+  {
+    "title": "11 · Resultados y problemas frecuentes",
+    "blocks": [
+      [
+        "h",
+        "Los mensajes de la GUI"
+      ],
+      [
+        "p",
+        "Consulta finalizada correctamente: terminó la petición de información; lee los datos para conocer la salud. Prueba solicitada correctamente: consulta después Progreso DST e Historial. Solicitud procesada sin errores: terminó la petición avanzada, pero su efecto o progreso se explica en la salida. No se pudo completar la operación: revisa el motivo y el código indicado. La operación se ha cancelado: no la des por completada."
+      ],
+      [
+        "h",
+        "No aparecen discos o falta información"
+      ],
+      [
+        "p",
+        "Comprueba permisos de administrador, alimentación y conexión. Pulsa Buscar discos después de conectar una unidad. Si hay cero módulos, utiliza Elegir carpeta y selecciona donde estén los EXE de Seagate. Si Windows no facilita letras o capacidad, puede aparecer n/d sin que falle la detección del disco. Un RAID o un puente USB puede ocultar la unidad física o limitar los datos."
+      ],
+      [
+        "h",
+        "Operación no compatible"
+      ],
+      [
+        "p",
+        "No significa necesariamente que el disco esté averiado. Puede faltar la función, estar restringida por el firmware o no pasar a través del adaptador. Comprueba la ayuda de ese módulo y la conexión; no añadas parámetros aleatorios para forzarla."
+      ],
+      [
+        "h",
+        "El disco ha cambiado o el ejecutable se ha modificado"
+      ],
+      [
+        "p",
+        "La GUI vuelve a comprobar la identidad antes de operar. Tras conectar o desconectar unidades, busca de nuevo y selecciona el disco correcto. Si has sustituido los programas de openSeaChest, elige otra vez su carpeta para recargar herramientas y ayuda."
+      ],
+      [
+        "h",
+        "Guardar información para pedir ayuda"
+      ],
+      [
+        "p",
+        "Pulsa Guardar registro y conserva el TXT con el resultado completo visible. El búfer tiene un límite: los mensajes más antiguos pueden descartarse. Los archivos generados por herramientas van por defecto a %LOCALAPPDATA%\\SeaChestGUI\\Resultados, salvo que hayas indicado otro destino. Incluye versión de la GUI, versión del módulo, conexión SATA/USB y qué botón u opción utilizaste. Revisa y oculta datos privados antes de compartir números de serie, rutas o registros."
+      ],
+      [
+        "h",
+        "Lo que esta interfaz no hace"
+      ],
+      [
+        "p",
+        "No recupera archivos eliminados, no repara daños mecánicos, no garantiza la salud futura ni calcula por sí sola cuánto le queda de vida al disco. Tampoco traduce toda la salida de Seagate: los mensajes originales y la ayuda de cada opción pueden aparecer en inglés."
+      ]
+    ]
+  },
+  {
+    "title": "12 · Créditos, licencias y enlaces",
+    "blocks": [
+      [
+        "p",
+        "SeaChest GUI · LaNaveRETRO · versión 0.1.8 · Guía en español, 13/10/2026. Interfaz independiente desarrollada para LaNaveRETRO con asistencia de OpenAI/Codex. No es un producto oficial de Seagate ni implica patrocinio o aprobación de Seagate, Microsoft, Mozilla u OpenAI."
+      ],
+      [
+        "h",
+        "Componentes y condiciones"
+      ],
+      [
+        "p",
+        "El código original de esta interfaz y el texto original de la guía se distribuyen con licencia MIT; el código fuente está en src y la fuente de la guía en docs. MIT no concede derechos sobre marcas ni cambia las licencias de terceros. El texto completo está en LICENCIAS/SeaChestGUI-MIT.txt."
+      ],
+      [
+        "p",
+        "openSeaChest: Copyright (c) 2014-2026 Seagate Technology LLC and/or its Affiliates. El proyecto declara Mozilla Public License 2.0 y avisos adicionales, incluido Open Fabrics NVMe IOCTL. Se adjunta sin modificar su LICENSE.md de v26.09-alpha-zbd. Esta GUI invoca los EXE externos: el ZIP del frontend no contiene binarios ni bibliotecas de Seagate. Los proyectos opensea-common, opensea-transport, opensea-operations y opensea-jsonformat forman parte del entorno upstream; sus avisos pertenecen a sus respectivos autores."
+      ],
+      [
+        "p",
+        "El PDF incorpora subconjuntos de DejaVu Sans: copyright Bitstream, Inc.; los cambios DejaVu son de dominio público, sujetos al aviso de fuentes adjunto. Windows y .NET Framework son de Microsoft; se utilizan como requisitos del sistema, no se redistribuyen aquí. Seagate, openSeaChest y demás nombres se mencionan solo para identificar sus productos. Se incluyen textos de licencia completos como anexos del PDF y en LICENCIAS."
+      ],
+      [
+        "h",
+        "Si distribuyes el frontend junto a Seagate"
+      ],
+      [
+        "p",
+        "Conserva todos los avisos y licencias originales de la distribución concreta de openSeaChest y facilita a los destinatarios acceso a su código fuente correspondiente conforme a sus licencias. No sustituyas esos avisos por los de la GUI. Si cambias la versión de los binarios o sus componentes, revisa también sus avisos; la copia adjunta corresponde a v26.09-alpha-zbd. La entrega de esta guía no certifica por sí sola cualquier futura redistribución."
+      ],
+      [
+        "h",
+        "Enlaces oficiales y fuentes"
+      ],
+      [
+        "p",
+        "Proyecto y código fuente: https://github.com/Seagate/openSeaChest\nDescargas: https://github.com/Seagate/openSeaChest/releases\nVersión de referencia: https://github.com/Seagate/openSeaChest/tree/v26.09-alpha-zbd\nDocumentación: https://github.com/Seagate/openSeaChest/wiki\nIncidencias del motor: https://github.com/Seagate/openSeaChest/issues\nLicencia upstream: https://github.com/Seagate/openSeaChest/blob/v26.09-alpha-zbd/LICENSE.md\nMPL 2.0 y preguntas frecuentes: https://www.mozilla.org/en-US/MPL/2.0/\nTemporizador Windows: https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/disk-settings-disk-idle-timeout\nLaNaveRETRO: https://www.LaNaveRETRO.com"
+      ],
+      [
+        "p",
+        "Las instrucciones de energía se contrastaron con la ayuda oficial de PowerControl del tag v26.09-alpha-zbd (commit c858a3800eeafe8ab73350602066e683dee698b6). La ayuda del ejecutable instalado y el manual del modelo prevalecen si hay diferencias. Este documento cubre los flujos de la GUI y las familias de funciones, no sustituye la referencia técnica de cada combinación de argumentos."
+      ]
+    ]
+  }
+]

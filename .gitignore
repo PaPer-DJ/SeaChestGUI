@@ -1,0 +1,26 @@
+# Compilados y recursos generados
+*.exe
+*.dll
+*.pdb
+*.mdb
+*.res
+*.zip
+*.nupkg
+bin/
+obj/
+dist/
+build/
+# Entorno local
+.vs/
+.vscode/
+__pycache__/
+*.py[cod]
+.venv/
+# Datos locales y registros: no publicar información de discos
+Resultados/
+*.log
+*.user
+*.suo
+.env
+.env.*
+# Conservamos intencionadamente PDF, PNG y GuideContent.cs

@@ -1,0 +1,26 @@
+﻿Pruebas sin acceso a discos (Linux/Mono)
+
+Desde la carpeta principal de la GUI:
+  mcs -r:System.Core -r:SeaChestGUI.exe -out:tests/CoreTests.exe tests/CoreTests.cs
+  MONO_PATH=. mono tests/CoreTests.exe
+
+Para repetir la validación con ayudas reales, extrae los binarios Linux
+oficiales v26.03.2 y ejecuta únicamente --help de cada uno. Guarda cada
+salida en una carpeta; después:
+  chmod +x tests/fake_backend.py
+  MONO_PATH=. mono tests/CoreTests.exe /ruta/a/ayudas tests/fake_backend.py
+
+El backend simulado solo devuelve argumentos, un error o una espera.
+No usa dispositivos. No sustituye pruebas de aceptación en Windows.
+
+Pruebas de capacidad y letras (datos simulados, sin consultas WMI):
+  mcs -r:System.Core -r:SeaChestGUI.exe -out:tests/MetadataTests.exe tests/MetadataTests.cs
+  MONO_PATH=. mono tests/MetadataTests.exe
+
+Comprueban la correspondencia entre discos, particiones y letras, el formato
+de capacidades y la actualización de información. La consulta WMI real se
+valida en Windows; estas pruebas no simulan sus controladores ni permisos.
+
+Pruebas de la tabla de resultados:
+  mcs -r:System.Core -r:SeaChestGUI.exe -out:tests/ResultsTests.exe tests/ResultsTests.cs
+  MONO_PATH=. mono tests/ResultsTests.exe
