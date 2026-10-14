@@ -18,6 +18,16 @@ La aplicación es portátil y requiere .NET Framework 4.8. Para utilizarla no ne
 
 ## Qué puedes hacer
 
+### Por qué nació esta interfaz
+
+Creé esta interfaz con una idea muy sencilla: **quería que mi disco duro estuviese listo cuando lo necesitase, sin estar aparcando y reactivando los cabezales constantemente mientras utilizaba el PC.**
+
+Cuando estás abriendo carpetas, cargando juegos o accediendo a una colección de ROMs, esas entradas y salidas del reposo pueden convertirse en esperas y pequeños parones: el Explorador o un programa parecen quedarse «pensando» mientras esperan al disco. La idea es reducir esos tirones o *stalls* cuando vienen de ese comportamiento, y evitar ciclos mecánicos repetidos que no aportan nada durante el uso habitual.
+
+**El objetivo es un uso más fluido y menos aparcados innecesarios, cuidando también el funcionamiento del disco a largo plazo.** Quería poder ajustar todo esto de forma sencilla, con botones y explicaciones en español, sin tener que pelearme con una consola de comandos. Por eso nació SeaChest GUI y por eso la guía empieza precisamente por aquí.
+
+A partir de esa necesidad, la interfaz también incorpora acceso a información del disco, comprobaciones de salud, diagnósticos y las demás opciones de openSeaChest.
+
 ### Utilidad principal: reducir reposos y aparcados de cabezales innecesarios
 
 **Evita que tu disco duro Seagate entre en reposo o aparque los cabezales demasiado a menudo mientras utilizas el PC.** En modelos compatibles, SeaChest GUI permite ajustar o desactivar las funciones de ahorro energético EPC/APM que provocan ese comportamiento, desde una interfaz gráfica y sin escribir comandos.
