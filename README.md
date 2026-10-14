@@ -18,12 +18,32 @@ La aplicación es portátil y requiere .NET Framework 4.8. Para utilizarla no ne
 
 ## Qué puedes hacer
 
+### Utilidad principal: reducir reposos y aparcados de cabezales innecesarios
+
+**Evita que tu disco duro Seagate entre en reposo o aparque los cabezales demasiado a menudo mientras utilizas el PC.** En modelos compatibles, SeaChest GUI permite ajustar o desactivar las funciones de ahorro energético EPC/APM que provocan ese comportamiento, desde una interfaz gráfica y sin escribir comandos.
+
+El «parking» consiste en retirar los cabezales a su posición de descanso. Si ocurre con demasiada frecuencia entre accesos, el disco debe volver a colocarlos para leer o escribir. Cuando además se detiene el motor, también necesita tiempo para recuperar su velocidad.
+
+¿En qué puede ayudarte?
+
+- **Menos esperas al acceder al disco:** puede evitar pausas al abrir carpetas, cargar juegos, acceder a una biblioteca de ROMs o reproducir archivos cuando la causa es la salida del reposo.
+- **Menos ciclos mecánicos innecesarios:** permite reducir aparcados y reactivaciones repetidos, con el objetivo de limitar el desgaste asociado a esos ciclos y cuidar el disco a largo plazo. **No garantiza un alargamiento de su vida útil**, que depende también de temperatura, uso y estado de la unidad.
+- **Un comportamiento más constante:** resulta útil en discos de datos que consultas con frecuencia y que prefieres mantener disponibles durante la sesión.
+- **Ajustes que puedes comprobar y restaurar:** la **Guía de Uso** explica cómo consultar la configuración, aplicar los cambios compatibles, verificar el resultado y volver a los valores anteriores.
+
+Estos ajustes no impiden todos los aparcados: Windows, el firmware o una caja USB pueden gestionarlos por separado. Mantener el disco activo puede aumentar consumo y temperatura. Su disponibilidad depende del modelo y la conexión; el aparcado normal es una función prevista por el fabricante y no significa por sí mismo que el disco esté fallando.
+
+Si este es tu objetivo, empieza por la primera sección de la pestaña **Guía de Uso** o por la [guía en PDF](Guia_de_Uso_SeaChestGUI_v0.1.8.pdf).
+
+Referencia técnica: [explicación sobre aparcado y ahorro energético en el repositorio oficial de openSeaChest](https://github.com/Seagate/openSeaChest/discussions/82).
+
+### También puedes
+
 - Buscar discos al arrancar y actualizar la lista con **Buscar discos**, por ejemplo al conectar una unidad USB.
 - Ver capacidad y letras de Windows tanto en el selector como en los resultados; `N/A` indica que no se han comunicado letras y `n/d` que el dato no está disponible.
 - Consultar información, SMART, estadísticas y salud NVMe, según la compatibilidad del disco.
 - Iniciar pruebas DST cortas o largas y consultar su progreso e historial.
 - Explorar las opciones de cada módulo instalado y componer operaciones desde **Todas las opciones**.
-- Consultar ajustes de energía EPC/APM y modificarlos en unidades compatibles.
 - Guardar el registro visible y abrir la carpeta de resultados.
 - Leer la **Guía de Uso**, ampliar su lectura o abrir su PDF.
 
