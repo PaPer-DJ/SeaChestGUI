@@ -1,0 +1,260 @@
+﻿SeaChest GUI · LaNaveRETRO · v0.1.9
+Interfaz independiente para openSeaChest de Seagate
+
+NOVEDAD v0.1.9 — ORIGEN Y UTILIDAD DE LA INTERFAZ
+==============================================
+La Guía de Uso integrada y la pestaña Ayuda explican por qué nació la GUI:
+evitar reposos y aparcados de cabezales excesivos durante el uso del PC,
+reducir ciclos innecesarios y las esperas al abrir carpetas, juegos o ROMs.
+Se distingue el aparcado de la parada del motor y se explica cuándo puede
+convenir mantener el disco girando, con más consumo y calor y buena ventilación.
+No se afirma que el parking sea la principal causa de avería ni se garantiza
+una mayor vida útil. No hay cambios en los comandos ni en las protecciones.
+
+Incluye Guia_de_Uso_SeaChestGUI_v0.1.9.pdf con el mismo contenido y los enlaces
+al repositorio de LaNaveRETRO y a las fuentes técnicas. Para actualizar, cierra
+la aplicación y sustituye el EXE, su configuración, el PDF y LICENCIAS.
+
+NOVEDAD v0.1.8 — GUÍA DE USO INTEGRADA Y PDF
+=========================================
+Nueva pestaña Guía de Uso, situada justo antes de Ayuda.
+Incluye 12 secciones en español y 3 anexos de licencias, con selector de
+sección, lectura ampliada y enlaces. La guía empieza por los ajustes EPC/APM
+para reducir reposos en HDD compatibles y explica cómo comprobarlos y
+restaurarlos. Continúa con información, salud, DST, opciones avanzadas,
+firmware, borrado, formato, seguridad y solución de problemas.
+
+El PDF Guia_de_Uso_SeaChestGUI_v0.1.8.pdf contiene la misma guía, con
+marcadores, enlaces y textos de licencia completos (19 páginas).
+Para usar Abrir guía PDF, copia también el PDF junto a SeaChestGUI.exe.
+Conserva LICENCIAS y todos los avisos de la distribución original de Seagate.
+La guía integrada funciona aunque no tengas el PDF junto al ejecutable.
+
+NOVEDAD v0.1.7 — MENSAJES FINALES MÁS CLAROS
+==========================================
+Las consultas habituales, como Información del disco, terminan con:
+«Consulta finalizada correctamente.»
+Ya no muestran el código 0 ni un aviso genérico de operaciones pendientes.
+Al solicitar una prueba DST se indica cómo consultar su progreso e historial.
+Las operaciones avanzadas indican que la solicitud se ha procesado sin errores;
+su estado concreto debe leerse en la salida de la herramienta.
+Los errores y cancelaciones se explican por separado, conservando su código
+para facilitar el diagnóstico. Una consulta correcta no certifica por sí sola
+la salud del disco: consulta sus datos SMART y resultados de diagnóstico.
+
+NOVEDAD v0.1.6 — VENTANA MÁS ESTRECHA Y MÁS RESULTADOS
+===================================================
+Tamaño inicial del área de la ventana: 1040 × 870, frente a 1180 × 870.
+El panel Resultados gana aproximadamente 64 píxeles de altura al abrir,
+equivalentes a unas cuatro líneas adicionales con la fuente actual.
+Se mantiene la altura total, reduciendo el espacio vertical de los botones.
+La ventana sigue siendo redimensionable. Las medidas y el número de líneas
+visibles pueden variar según el escalado de pantalla de Windows.
+
+NOVEDAD v0.1.5 — CAPACIDAD Y UNIDAD EN RESULTADOS
+==============================================
+La tabla de búsqueda del panel Resultados incorpora Capacidad y Unidad,
+justo después de Handle y antes de Model Number. Muestra todas las letras
+asignadas en Windows; si no hay ninguna, muestra N/A (también en el selector).
+Si no se pudo consultar Windows, se conserva «Letras n/d» para distinguir
+un dato desconocido de una unidad sin letra asignada.
+La tabla se presenta cuando termina la búsqueda y la consulta de metadatos.
+Se actualiza al arrancar y al pulsar Buscar discos. Guardar registro incluye
+las nuevas columnas. Modelo, serie, firmware y mensajes se conservan.
+
+NOVEDAD v0.1.4 — CAPACIDAD Y LETRAS DE UNIDAD
+==========================================
+El selector muestra el identificador, la capacidad total del disco físico,
+las letras de sus particiones y los datos originales de modelo y serie.
+Ejemplo: PD1 | 8 TB | D:, E: | ST8000VN004 ...
+
+La capacidad se expresa en unidades decimales (1 TB = 1.000.000.000.000 bytes),
+por lo que puede diferir de la cifra mostrada por el Explorador de Windows.
+No representa el espacio libre ni el tamaño de una sola partición.
+Las letras se consultan mediante WMI de Windows, en modo de solo lectura.
+Si hay varias, se muestran todas las que Windows asocia al disco.
+«N/A» indica que Windows no ha comunicado letras para esa unidad.
+«Capacidad n/d» y «Letras n/d» indican información no disponible.
+
+Se actualizan al arrancar y al pulsar «Buscar discos», también para USB.
+La consulta adicional tiene un límite de espera de 12 segundos en la GUI;
+si falla, los discos detectados por openSeaChest siguen estando disponibles.
+Los identificadores sin correspondencia exacta con un disco físico de
+Windows (por ejemplo CSMI) pueden mostrar estos datos como no disponibles.
+No se asignan letras ni se modifican particiones. Los comandos siguen usando
+el identificador original del disco y su comprobación de identidad.
+
+NOVEDAD v0.1.3 — BÚSQUEDA AUTOMÁTICA AL ABRIR
+===========================================
+La aplicación busca los discos automáticamente al arrancar, después de
+localizar los ejecutables y cargar la ayuda inicial. También realiza una
+búsqueda al elegir otra carpeta válida de herramientas.
+El botón «Buscar discos» sigue disponible para actualizar la lista cuando
+conectas o desconectas una unidad USB. No hay sondeo periódico automático.
+La unidad sobre la que operar se sigue seleccionando de forma explícita.
+
+CORRECCIÓN v0.1.2 — DETECCIÓN DE DISCOS EN WINDOWS
+================================================
+Se reconoce la tabla Vendor / Handle / Model Number / Serial Number / FwRev
+que emite openSeaChest v26.09-alpha-zbd en Windows. Antes, la GUI esperaba
+Handle al principio y mostraba cero discos aunque openSeaChest sí los listaba.
+Se conserva el formato anterior con Handle como primera columna.
+La nueva lectura se usa tanto en Buscar discos como al comprobar la identidad
+antes de ejecutar una operación. Prueba de regresión con cuatro filas del
+formato de Windows (números de serie de prueba): cuatro unidades reconocidas.
+
+CORRECCIÓN v0.1.1 — ARRANQUE EN WINDOWS 10
+=============================================
+La compilación anterior no incluía el manifiesto UAC dentro del EXE.
+Además utilizaba una variante de String.Split ausente en .NET Framework.
+Se han corregido las tres llamadas y se ha compilado toda la aplicación
+contra las referencias oficiales Microsoft .NET Framework 4.8 (paquete
+Microsoft.NETFramework.ReferenceAssemblies.net48 1.0.3), para evitar el uso
+de APIs exclusivas del entorno Mono.
+Esta compilación incorpora el recurso RT_MANIFEST (tipo 24, ID 1) con
+requireAdministrator. Se ha extraído y verificado el XML del EXE compilado.
+Además, el arranque comprueba los permisos y puede solicitar elevación con
+el diálogo UAC normal de Windows; si se cancela, sale sin ejecutar herramientas.
+No se modifica ni se desactiva la configuración UAC de Windows.
+
+Para actualizar: cierra la GUI anterior y reemplaza SeaChestGUI.exe y
+SeaChestGUI.exe.config. No hace falta sustituir las herramientas de Seagate.
+La aceptación del diálogo UAC en Windows real sigue pendiente de validación.
+
+INSTALACIÓN / USO
+================
+1. Descarga y extrae openSeaChest para Windows desde:
+   https://github.com/Seagate/openSeaChest/releases
+   Usa x64 en un Windows x64 normal.
+2. Copia SeaChestGUI.exe, SeaChestGUI.exe.config, el PDF v0.1.9 y LICENCIAS
+   junto a openSeaChest_Basics.exe y los otros ejecutables de la distribución.
+3. Abre SeaChestGUI.exe con doble clic. Acepta el aviso de administrador.
+4. Espera a la búsqueda automática y selecciona el disco por modelo y serie.
+   Usa «Buscar discos» para actualizar la lista si conectas una unidad USB.
+5. Usa las tareas habituales o «Todas las opciones».
+
+También puedes guardar la GUI en otra carpeta y usar «Elegir carpeta».
+Selecciona exactamente la carpeta que contiene los EXE, no la carpeta padre.
+No requiere Python, PowerShell, terminal, instalación de la GUI ni Internet.
+Requiere Windows 10/11 con .NET Framework 4.8. No es una aplicación firmada.
+Los ejecutables originales de Seagate NO están incluidos en este paquete.
+Conserva los archivos y avisos originales de la distribución de Seagate.
+
+QUÉ INCLUYE
+===========
+- Detección de discos mediante openSeaChest y selección explícita de unidad.
+- Información del disco, estado y atributos SMART, estadísticas, salud NVMe,
+  energía, inicio de DST corto/largo, progreso e historial de pruebas.
+- Catálogo dinámico para todos los módulos openSeaChest*.exe de la carpeta.
+- Búsqueda entre las opciones y su ayuda original.
+- Composición gráfica de opciones y valores, incluidos los módulos de
+  borrado, formato, firmware, energía, seguridad, registros, NVMe y otros.
+- Selección de archivos sin escribir rutas a mano.
+- Salida del proceso integrada, códigos de error y exportación a TXT.
+- Confirmación de operaciones avanzadas y nueva comprobación de identidad
+  del disco antes de ejecutarlas.
+
+CÓMO USAR «TODAS LAS OPCIONES»
+=============================
+1. Selecciona el módulo adecuado (Basics, SMART, PowerControl, etc.).
+2. Busca y selecciona una opción. Lee la explicación original en inglés.
+3. Escribe sus valores: UN ARGUMENTO POR LÍNEA, sin comillas añadidas.
+   Un nombre de archivo con espacios ocupa una sola línea completa.
+   Las opciones sin parámetros se añaden dejando el campo vacío.
+4. Pulsa «Añadir opción». Repite para combinar las opciones necesarias.
+5. Revisa el disco y pulsa «Revisar y ejecutar».
+
+Ejemplo de consulta avanzada:
+  Módulo: SMART
+  Opción: --smartAttributes
+  Valor: hybrid
+  Añadir opción > Revisar y ejecutar.
+
+--device / -d se gestiona mediante el selector superior. No lo escribas
+como un valor. Esta versión trabaja con UNA unidad a la vez y no ofrece
+«all» ni lotes de discos. Para consultas globales como --help o --scan,
+puedes desmarcar «Aplicar al disco seleccionado».
+
+Las opciones --scan y --Scan se mantienen diferenciadas: no son idénticas.
+La aplicación conserva los nombres y valores originales. No traduce ni
+valida automáticamente todas las combinaciones admitidas por cada firmware.
+Si una opción exige --confirm, añade esa opción con el valor que indique
+la ayuda. La GUI nunca lo inserta a escondidas.
+
+OPERACIONES Y RESULTADOS
+=======================
+Un código 0 significa que el proceso no comunicó un error. No significa
+que el disco esté sano ni que una operación interna haya finalizado.
+Los DST de los botones se inician en segundo plano; consulta «Progreso DST»
+y después «Historial de pruebas DST». Para otras operaciones, utiliza las
+opciones de progreso del módulo correspondiente.
+
+No se ofrece un botón genérico que mate el proceso: podría dejar un formato,
+una actualización o un borrado en curso dentro del disco. La GUI bloquea el
+cierre mientras espera un proceso. Las opciones de abortar que ofrezca el
+propio módulo están disponibles en su catálogo cuando no hay otro proceso
+activo. Mantén el equipo alimentado y evita suspenderlo durante operaciones.
+
+La GUI comprueba por SHA-256 que un ejecutable no haya cambiado desde que
+se eligió su carpeta. Esto NO certifica su procedencia. Utiliza una
+extracción oficial, en una carpeta de confianza. Si cambias la versión,
+vuelve a elegir la carpeta para recargar las herramientas y su ayuda.
+
+Como medida adicional, bloquea el modo avanzado si WMI identifica que el
+disco contiene el Windows actual. Esa detección puede no estar disponible
+(en particular con identificadores CSMI). Nunca la uses como sustituto de
+comprobar personalmente modelo y serie. El modo avanzado pide confirmar
+incluso consultas que no estén en la lista de consultas globales simples.
+
+Los archivos generados por las herramientas se guardan, por defecto, en:
+  %LOCALAPPDATA%\SeaChestGUI\Resultados
+Puedes abrir esa carpeta desde «Carpeta de resultados». Usa rutas absolutas
+si especificas un archivo manualmente. --outputPath u opciones equivalentes
+pueden modificar el destino de los archivos que genere openSeaChest.
+
+El registro de pantalla es un búfer limitado (~1,5 millones de caracteres).
+Cuando se llena, descarta el contenido anterior; no es un archivo de auditoría
+completo. «Guardar registro» exporta lo visible. La GUI no guarda registros
+automáticamente. Los argumentos avanzados se omiten del registro automático,
+pero la salida del propio ejecutable podría incluir información sensible.
+
+ESTADO DE ESTA ENTREGA
+=====================
+Compilada como aplicación Windows .NET (WinExe / AnyCPU).
+Pruebas realizadas el 30/09/2026 en Linux con Mono:
+- 65 comprobaciones del parser, argumentos y ejecución contra el EXE final.
+- 17 comprobaciones de capacidad, asociación de letras y texto del selector.
+- 6 comprobaciones de orden de columnas, alineación y conservación de datos.
+- Análisis de las ayudas de los 17 módulos Linux oficiales v26.03.2:
+  845 entradas de opciones, contando cada módulo por separado.
+- Revisión visual de la interfaz con datos ficticios.
+- No se ha ejecutado ningún comando sobre discos físicos.
+
+Pendiente de probar en Windows real: UAC, acceso a discos, WMI, controladoras,
+adaptadores USB, respuesta de cada modelo y operaciones de modificación.
+Los módulos Windows pueden tener diferencias respecto a Linux: la GUI lee
+la ayuda del EXE instalado al abrir cada módulo, no utiliza un catálogo fijo.
+Esta versión es una primera entrega para validar; no se ha certificado la
+compatibilidad de todas las operaciones con todos los discos.
+
+PRIMERA COMPROBACIÓN EN TU EQUIPO
+===============================
+Abre la GUI, busca discos, selecciona una unidad y pulsa «Información del
+disco» y «Estado SMART». Guarda el registro si aparece un problema.
+No empieces la validación por un borrado, cambio de sectores o firmware.
+
+FUENTES Y DESARROLLO
+===================
+src/                   Código C# y manifiesto UAC.
+COMPILAR.cmd           Recompilación opcional con el compilador de Windows.
+tests/                 Pruebas del protocolo y backend simulado.
+VISTA_PREVIA.png       Captura del diseño v0.1 en Linux/Mono; Windows puede
+                       dibujar controles y fuentes de forma diferente.
+
+Documentación oficial consultada:
+https://github.com/Seagate/openSeaChest/releases/tag/v26.03.2
+https://github.com/Seagate/openSeaChest/wiki/Introduction-To-Command-Line-Tools
+https://github.com/Seagate/openSeaChest/wiki/How-To-Check-Drive-Health
+
+La GUI es independiente y no está afiliada ni certificada por Seagate.
+openSeaChest y las marcas de Seagate pertenecen a sus respectivos titulares.

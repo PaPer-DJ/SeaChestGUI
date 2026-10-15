@@ -2,13 +2,13 @@
 
 Interfaz gráfica independiente en español para **openSeaChest de Seagate**. Permite consultar discos, iniciar diagnósticos y acceder a las opciones de las herramientas desde Windows, sin escribir comandos en una consola.
 
-**Versión: 0.1.8 · Windows 10/11 · .NET Framework 4.8 · Licencia MIT para la GUI**
+**Versión: 0.1.9 · Windows 10/11 · .NET Framework 4.8 · Licencia MIT para la GUI**
 
 Proyecto comunitario independiente, sin afiliación ni certificación de Seagate. Los ejecutables de openSeaChest se descargan por separado.
 
 ## Descargar y empezar
 
-1. Abre **Releases** en este repositorio y descarga `SeaChestGUI_v0.1.8_Windows.zip`. Los archivos automáticos «Source code» contienen el código para desarrolladores.
+1. Abre **Releases** en este repositorio y descarga `SeaChestGUI_v0.1.9_Windows.zip`. Los archivos automáticos «Source code» contienen el código para desarrolladores.
 2. Descarga la distribución de [openSeaChest para Windows](https://github.com/Seagate/openSeaChest/releases) adecuada a tu equipo y extráela.
 3. Extrae el ZIP de la GUI y copia `SeaChestGUI.exe`, `SeaChestGUI.exe.config`, el PDF y la carpeta `LICENCIAS` junto a `openSeaChest_Basics.exe`. Conserva también los avisos originales de Seagate.
 4. Abre `SeaChestGUI.exe` y acepta la solicitud de administrador. También puedes elegir la carpeta de herramientas desde la aplicación.
@@ -47,7 +47,7 @@ El «parking» consiste en retirar los cabezales a su posición de descanso. **L
 
 Estos ajustes no impiden todos los aparcados: Windows, el firmware o una caja USB pueden gestionarlos por separado. Mantener el disco activo puede aumentar consumo y temperatura. Su disponibilidad depende del modelo y la conexión; el aparcado normal es una función prevista por el fabricante y no significa por sí mismo que el disco esté fallando.
 
-Si este es tu objetivo, empieza por la primera sección de la pestaña **Guía de Uso** o por la [guía en PDF](Guia_de_Uso_SeaChestGUI_v0.1.8.pdf).
+Si este es tu objetivo, empieza por la primera sección de la pestaña **Guía de Uso** o por la [guía en PDF](Guia_de_Uso_SeaChestGUI_v0.1.9.pdf).
 
 Referencia técnica: [explicación sobre aparcado y ahorro energético en el repositorio oficial de openSeaChest](https://github.com/Seagate/openSeaChest/discussions/82).
 
@@ -69,7 +69,7 @@ El catálogo se obtiene de la ayuda de los ejecutables instalados. La disponibil
 
 La guía comienza por cómo reducir los reposos de un HDD mediante EPC/APM, comprobar el resultado y restaurar la configuración. Después explica el resto de funciones en lenguaje sencillo.
 
-- [Guía en PDF (19 páginas)](Guia_de_Uso_SeaChestGUI_v0.1.8.pdf)
+- [Guía en PDF (20 páginas)](Guia_de_Uso_SeaChestGUI_v0.1.9.pdf)
 - [Guía en texto](docs/GUIA_DE_USO.txt)
 - [Cambios por versión](CHANGELOG.md)
 

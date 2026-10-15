@@ -23,14 +23,14 @@ namespace SeaChestGUI {
             reader.HandleCreated+=(s,e)=>reader.BeginInvoke(loadChapter);
             var actions=new FlowLayoutPanel {Dock=DockStyle.Fill,WrapContents=false};
             actions.Controls.Add(Button("Abrir guía PDF",(s,e)=> {
-                string path=Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Guia_de_Uso_SeaChestGUI_v0.1.8.pdf");
-                if(!File.Exists(path)) {MessageBox.Show(this,"Copia Guia_de_Uso_SeaChestGUI_v0.1.8.pdf del ZIP junto a SeaChestGUI.exe. La guía integrada sigue disponible aquí.","Guía PDF",MessageBoxButtons.OK,MessageBoxIcon.Information);return;}
+                string path=Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Guia_de_Uso_SeaChestGUI_v0.1.9.pdf");
+                if(!File.Exists(path)) {MessageBox.Show(this,"Copia Guia_de_Uso_SeaChestGUI_v0.1.9.pdf del ZIP junto a SeaChestGUI.exe. La guía integrada sigue disponible aquí.","Guía PDF",MessageBoxButtons.OK,MessageBoxIcon.Information);return;}
                 try {Process.Start(new ProcessStartInfo(path){UseShellExecute=true});}catch(Exception ex){MessageBox.Show(this,"No se pudo abrir el PDF: "+ex.Message,"Guía PDF",MessageBoxButtons.OK,MessageBoxIcon.Information);}
             },150));
             actions.Controls.Add(Button("Ampliar lectura",(s,e)=> {
                 using(var f=new Form {Text=GuideContent.Titles[chapters.SelectedIndex],Size=new Size(900,760),MinimumSize=new Size(650,480),StartPosition=FormStartPosition.CenterParent}) {
                     var full=new RichTextBox {ReadOnly=true,Dock=DockStyle.Fill,BackColor=Color.White,BorderStyle=BorderStyle.None,DetectUrls=true};
-                    full.LinkClicked+=(sender,link)=>OpenGuideLink(link.LinkText);f.Padding=new Padding(18);f.Controls.Add(full);f.Shown+=(sender,args)=>{full.Rtf=reader.Rtf;full.Select(0,0);full.ScrollToCaret();};f.ShowDialog(this);
+                    full.LinkClicked+=(sender,link)=>OpenGuideLink(link.LinkText);f.Padding=new Padding(18);f.Controls.Add(full);f.Shown+=(sender,args)=>{full.Rtf=GuideContent.Rtf[chapters.SelectedIndex];full.Select(0,0);full.ScrollToCaret();};f.ShowDialog(this);
                 }
             },150));
             layout.Controls.Add(actions,0,2);chapters.SelectedIndex=0;

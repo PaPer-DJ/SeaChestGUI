@@ -75,4 +75,4 @@ El paquete portable debe contener el EXE, su configuración, la guía PDF, las l
 
 Consulta `tests/RESULTADOS.txt`. Las comprobaciones registradas se hicieron en Linux/Mono con datos simulados y referencias Microsoft. No se certifican todas las operaciones en Windows ni todas las combinaciones de discos, puentes USB y controladoras.
 
-Esta preparación para GitHub conserva el código y el ejecutable de 0.1.8; añade documentación de publicación. No añade CI ni publicación automática.
+La versión 0.1.9 actualiza la guía integrada, Ayuda y el PDF. Los comandos y protecciones se mantienen. No añade CI ni publicación automática.

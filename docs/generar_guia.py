@@ -61,6 +61,7 @@ styles={
  'p':ParagraphStyle('p',fontName='DV',fontSize=10.2,leading=14.4,textColor=navy,spaceAfter=9),
  'h':ParagraphStyle('h',fontName='DVB',fontSize=11.3,leading=15,textColor=teal,spaceBefore=5,spaceAfter=6,keepWithNext=True),
  'tip':ParagraphStyle('tip',fontName='DV',fontSize=10,leading=14,textColor=navy,backColor=colors.HexColor('#EAF4F1'),borderPadding=9,spaceBefore=5,spaceAfter=15),
+ 'credits':ParagraphStyle('credits',fontName='DV',fontSize=9.3,leading=12.8,textColor=navy,spaceAfter=8),
  'license':ParagraphStyle('license',fontName='DV',fontSize=8.7,leading=11.7,textColor=navy,spaceAfter=7)
 }
 def markup(t):
@@ -75,16 +76,16 @@ class GuideDoc(SimpleDocTemplate):
 def furniture(c,d):
     w,h=A4;c.saveState();c.setFillColor(navy);c.rect(0,h-36,w,36,fill=1,stroke=0)
     c.setFont('DVB',9);c.setFillColor(colors.white);c.drawString(43,h-23,'SeaChest GUI  /  GUÍA DE USO')
-    c.setFont('DV',8);c.drawRightString(w-43,h-23,'LaNaveRETRO  ·  v0.1.8')
-    c.setFillColor(teal);c.setFont('DV',8);c.drawString(43,25,'Interfaz independiente para openSeaChest  |  13/10/2026');c.drawRightString(w-43,25,str(d.page));c.restoreState()
-pdf=root/'Guia_de_Uso_SeaChestGUI_v0.1.8.pdf'
-doc=GuideDoc(str(pdf),pagesize=A4,rightMargin=43,leftMargin=43,topMargin=53,bottomMargin=43,title='Guía de Uso - SeaChest GUI v0.1.8',author='LaNaveRETRO',subject='Energía, diagnóstico y funciones de openSeaChest desde Windows')
+    c.setFont('DV',8);c.drawRightString(w-43,h-23,'LaNaveRETRO  ·  v0.1.9')
+    c.setFillColor(teal);c.setFont('DV',8);c.drawString(43,25,'Interfaz independiente para openSeaChest  |  14/10/2026');c.drawRightString(w-43,25,str(d.page));c.restoreState()
+pdf=root/'Guia_de_Uso_SeaChestGUI_v0.1.9.pdf'
+doc=GuideDoc(str(pdf),pagesize=A4,rightMargin=43,leftMargin=43,topMargin=53,bottomMargin=43,title='Guía de Uso - SeaChest GUI v0.1.9',author='LaNaveRETRO',subject='Energía, diagnóstico y funciones de openSeaChest desde Windows')
 story=[]
 for i,ch in enumerate(chapters):
     if i:story.append(PageBreak())
     story.append(Paragraph(markup(ch['title']),styles['title']))
     for kind,t in ch['blocks']:
-        st=styles['license'] if ch.get('license') and kind=='p' else styles[kind]
+        st=styles['license'] if ch.get('license') and kind=='p' else (styles['credits'] if ch['title'].startswith('12 ') and kind=='p' else styles[kind])
         story.append(Paragraph(markup(t),st))
 doc.build(story,onFirstPage=furniture,onLaterPages=furniture)
 print(pdf)

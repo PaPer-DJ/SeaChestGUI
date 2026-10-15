@@ -1,5 +1,13 @@
 # Historial de versiones
 
+## 0.1.9
+
+- Guía integrada y Ayuda con el origen de la interfaz y sus beneficios cotidianos.
+- Explicación de aparcados, ciclos mecánicos, rotación, consumo y temperatura.
+- PDF actualizado a partir de la misma fuente y enlaces al repositorio de la GUI.
+- Lectura ampliada de la guía cargada directamente desde el contenido original.
+- Comandos y protecciones sin cambios.
+
 ## 0.1.8
 
 - Nueva pestaña «Guía de Uso» antes de «Ayuda», con selector de sección y lectura ampliada.

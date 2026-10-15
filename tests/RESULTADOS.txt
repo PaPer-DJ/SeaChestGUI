@@ -1,3 +1,15 @@
+v0.1.9 — 14/10/2026
+PASS: compilación contra Microsoft .NET Framework 4.8 y manifiesto UAC.
+PASS: ensamblado 0.1.9.0, nuevo texto en Guía de Uso y Ayuda, cuatro pestañas,
+15 secciones cargadas y apertura de la lectura ampliada en Linux/Mono.
+La lectura ampliada usa directamente la fuente RTF para evitar un fallo
+observado al regenerarla desde el control en Mono.
+PASS: PDF de 20 páginas, 15 marcadores y 17 enlaces, revisado visualmente.
+PASS: texto sobre origen de la interfaz, pausas, ciclos, giro y temperatura.
+Los archivos Core.cs y WindowsDiskMetadata.cs se mantienen idénticos a v0.1.8.
+No se han ejecutado comandos sobre discos físicos. La apertura externa del
+PDF y los enlaces, UAC y las operaciones reales quedan por validar en Windows.
+
 v0.1.8 — 13/10/2026
 PASS: compilación contra Microsoft .NET Framework 4.8 y manifiesto UAC.
 PASS: cuatro pestañas, Guía de Uso antes de Ayuda; carga de las 15 secciones

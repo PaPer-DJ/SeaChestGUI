@@ -2,6 +2,24 @@
 
 Si simplemente quieres usar esta herramienta para reducir los reposos, las esperas al acceder a tu disco duro Seagate y los aparcamientos de cabezales asociados al ahorro de energía, empieza por estos pasos.
 
+Por qué nació esta interfaz
+
+Creé esta interfaz con una idea muy sencilla: quería que mi disco duro estuviese listo cuando lo necesitase, sin estar aparcando y reactivando los cabezales constantemente mientras utilizaba el PC.
+
+Al abrir carpetas, cargar juegos o acceder a una colección de ROMs, las entradas y salidas del reposo pueden convertirse en esperas y pequeños parones: el Explorador o un programa parecen quedarse pensando mientras esperan al disco. La idea es reducir esos tirones o stalls cuando vienen de ese comportamiento, con botones y explicaciones en español, sin pelearse con una consola.
+
+Menos ciclos innecesarios y un uso más fluido
+
+Aparcar y volver a cargar los cabezales acumula ciclos mecánicos. Son mecanismos diseñados para soportar un número determinado de ciclos; evitar repeticiones innecesarias busca limitar el desgaste asociado y cuidar el disco a largo plazo. No está demostrado que el parking sea la principal causa de avería en todos los discos ni se puede asegurar cuántos años más durarán.
+
+Si consultas el disco con frecuencia, puede ser preferible mantenerlo girando durante la sesión, aceptando algo más de consumo y calor, para evitar paradas, nuevos arranques y sus esperas. Mantén buena ventilación y respeta las temperaturas indicadas por el fabricante. Para periodos largos sin uso, dejarlo descansar puede tener sentido.
+
+Aparcar los cabezales no es lo mismo que parar el motor
+
+El parking retira los cabezales a su posición de descanso. Los platos pueden seguir girando con los cabezales aparcados: mantener la rotación no elimina por sí solo el parking. Los ajustes EPC/APM permiten actuar sobre el ahorro energético en modelos compatibles, pero Windows, el firmware o una caja USB pueden gestionar otros reposos. El aparcado normal es una función prevista por el fabricante, no una avería por sí mismo.
+
+Cómo empezar
+
 Esto puede mejorar la respuesta de un HDD compatible. No garantiza alargar su vida útil ni elimina todos los aparcamientos. Mantenerlo activo aumenta el consumo y puede elevar la temperatura. Si hay errores de lectura o ruidos anormales, consulta primero la sección de salud.
 
 1. Elige el disco correcto
@@ -271,7 +289,7 @@ No recupera archivos eliminados, no repara daños mecánicos, no garantiza la sa
 
 12 · Créditos, licencias y enlaces
 
-SeaChest GUI · LaNaveRETRO · versión 0.1.8 · Guía en español, 13/10/2026. Interfaz independiente desarrollada para LaNaveRETRO con asistencia de OpenAI/Codex. No es un producto oficial de Seagate ni implica patrocinio o aprobación de Seagate, Microsoft, Mozilla u OpenAI.
+SeaChest GUI · LaNaveRETRO · versión 0.1.9 · Guía en español, 14/10/2026. Interfaz independiente desarrollada para LaNaveRETRO con asistencia de OpenAI/Codex. No es un producto oficial de Seagate ni implica patrocinio o aprobación de Seagate, Microsoft, Mozilla u OpenAI.
 
 Componentes y condiciones
 
@@ -287,6 +305,7 @@ Conserva todos los avisos y licencias originales de la distribución concreta de
 
 Enlaces oficiales y fuentes
 
+Interfaz SeaChest GUI: https://github.com/PaPer-DJ/SeaChestGUI
 Proyecto y código fuente: https://github.com/Seagate/openSeaChest
 Descargas: https://github.com/Seagate/openSeaChest/releases
 Versión de referencia: https://github.com/Seagate/openSeaChest/tree/v26.09-alpha-zbd
@@ -296,6 +315,8 @@ Licencia upstream: https://github.com/Seagate/openSeaChest/blob/v26.09-alpha-zbd
 MPL 2.0 y preguntas frecuentes: https://www.mozilla.org/en-US/MPL/2.0/
 Temporizador Windows: https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/disk-settings-disk-idle-timeout
 LaNaveRETRO: https://www.LaNaveRETRO.com
+Aparcado y EPC, explicación del proyecto: https://github.com/Seagate/openSeaChest/discussions/82
+Ejemplo de manual con ciclos, modos y temperaturas (Enterprise Capacity v6 SAS): https://www.seagate.com/www-content/product-content/enterprise-hdd-fam/enterprise-capacity-3-5-hdd-10tb/_shared/docs/100791103a.pdf
 
 Las instrucciones de energía se contrastaron con la ayuda oficial de PowerControl del tag v26.09-alpha-zbd (commit c858a3800eeafe8ab73350602066e683dee698b6). La ayuda del ejecutable instalado y el manual del modelo prevalecen si hay diferencias. Este documento cubre los flujos de la GUI y las familias de funciones, no sustituye la referencia técnica de cada combinación de argumentos.
 
